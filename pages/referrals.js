@@ -1,3 +1,7 @@
+import Layout from '../components/Layout'
+
 export default () => (
-  <p>Referrals</p>
+    <Layout>
+      <p>Referrals</p>
+    </Layout>
 )
