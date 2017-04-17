@@ -1,0 +1,16 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "next start -p $PORT",
+    "build": "next build",
+    "dev": "next"
+  },
+  "dependencies": {
+    "next": "^2.1.1",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
+  }
+}
