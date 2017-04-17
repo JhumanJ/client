@@ -1,3 +1,5 @@
+import Layout from '../components/Layout'
+
 export default () => (
-  <p>Live MDT</p>
+  <Layout>Live MDT</Layout>
 )
