@@ -13,6 +13,7 @@
     "babel-plugin-css-modules-transform": "^1.2.7",
     "glamor": "^2.20.24",
     "next": "^2.1.1",
+    "nprogress": "^0.2.0",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-dom": "^15.5.4"
