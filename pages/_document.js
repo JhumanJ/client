@@ -20,6 +20,7 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"/>
           <title>PEACH Cancer</title>
           <style dangerouslySetInnerHTML={{ __html: this.props.css }} />
         </Head>

@@ -1,6 +1,10 @@
 import React from 'react'
-import {Button} from '../components/Button'
+import Button from '../components/Button'
+import Layout from '../components/Layout'
 
 export default () => (
-    <div>PEACH Cancer! <Button>Press Me :)</Button></div>
+    <Layout>
+        <p>PEACH Cancer!</p>
+        <Button>Press Me :)</Button>
+    </Layout>
 )
