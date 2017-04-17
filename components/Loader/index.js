@@ -18,7 +18,6 @@ const linkStyle = {
 export default () => (
   <div>
     <Head>
-      {/* Import CSS for nprogress */}
       <link rel='stylesheet' type='text/css' href='/static/nprogress.css' />
     </Head>
   </div>

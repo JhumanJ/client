@@ -1,7 +1,8 @@
 import Layout from '../components/Layout'
+import {P} from '../components/Text'
 
 export default () => (
     <Layout>
-        <p>Live MDT</p>
+        <P>Live MDT</P>
     </Layout>
 )

@@ -1,7 +1,8 @@
 import Layout from '../components/Layout'
+import {P} from '../components/Text'
 
 export default () => (
     <Layout>
-      <p>Referrals</p>
+      <P>Referrals</P>
     </Layout>
 )
