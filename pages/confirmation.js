@@ -1,3 +1,8 @@
+import Layout from '../components/Layout'
+
+
 export default () => (
-  <p>Confirmation</p>
+    <Layout>
+        <p>Confirmation</p>
+    </Layout>
 )

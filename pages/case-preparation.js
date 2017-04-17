@@ -1,3 +1,7 @@
+import Layout from '../components/Layout'
+
 export default () => (
-  <p>Case Preparation</p>
+  <Layout>
+    <p>Case Preparation</p>
+  </Layout>
 )
