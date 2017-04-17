@@ -2,7 +2,7 @@ import {style} from 'glamor'
 import Link from 'next/link'
 
 export default ({children, ...props}) => (
-    <Link {...props}>
+    <Link prefetch {...props}>
         <a className={styles.link} children={children}/>
     </Link>
 )
