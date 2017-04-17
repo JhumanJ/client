@@ -1,7 +1,8 @@
 import Layout from '../components/Layout'
+import {P} from '../components/Text'
 
 export default () => (
     <Layout>
-        <p>Jobs</p>
+        <P>Jobs</P>
     </Layout>
 )

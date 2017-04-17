@@ -1,7 +1,8 @@
 import Layout from '../components/Layout'
+import {P, Heading} from '../components/Text'
 
 export default () => (
   <Layout>
-    <p>Case Preparation</p>
+    <P>Case Preparation</P>
   </Layout>
 )
