@@ -5,6 +5,6 @@ import Layout from '../components/Layout'
 export default () => (
     <Layout>
         <p>PEACH Cancer!</p>
-        <Button>Press Me :)</Button>
+        <Button >Press Me :)</Button>
     </Layout>
 )
