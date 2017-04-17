@@ -8,7 +8,7 @@ export default ({name, ...props}) => (
 
 const styles = {
     container: style({
-        padding: '25px',
+        padding: '15px 25px',
         background: 'rgba(0, 0, 0, .1)'
     }),
     name: style({
