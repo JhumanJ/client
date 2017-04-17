@@ -3,7 +3,7 @@ import {style} from 'glamor'
 
 export default ({...props}) => (
     <div className={styles.container}>
-        <img className={styles.image} src={"https://raw.githubusercontent.com/reactjs/redux/master/logo/logo.png"}/>
+        <img className={styles.image} src="/static/img/logo.png"/>
     </div>
 )
 

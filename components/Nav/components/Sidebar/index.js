@@ -18,7 +18,7 @@ const styles = {
         flexDirection: 'column',
         alignItems: 'stretch',
         background: '#202D38',
-        width: '180px',
+        width: '210px',
         height: '100vh',
         overflowY: 'auto'
     })
