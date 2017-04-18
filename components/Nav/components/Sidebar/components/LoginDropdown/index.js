@@ -2,19 +2,17 @@ import {style} from 'glamor'
 
 export default ({name, ...props}) => (
     <div className={styles.container}>
-        <span className={styles.name}>{name}</span>
+        <span className={styles.name}>{name}  <i className="fa fa-caret-down" aria-hidden="true"></i></span>
     </div>
 )
 
 const styles = {
     container: style({
-        padding: '15px 25px',
-        background: 'rgba(0, 0, 0, .1)'
+        padding: '15px 25px'
     }),
     name: style({
-        fontFamily: 'Helvetica Neue, sans-serif',
+        fontFamily: 'Lato, sans-serif',
         fontSize: '13px',
         color: 'white',
-        fontWeight: 'bold'
     })
 }

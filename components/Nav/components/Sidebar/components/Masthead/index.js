@@ -9,11 +9,10 @@ export default ({...props}) => (
 
 const styles = {
     container: style({
-        background: 'rgba(0, 0, 0, .2)',
         position: 'relative',
         padding: '25px'
     }),
     image: style({
-        width: '100%',
+        width: '120px',
     })
 }

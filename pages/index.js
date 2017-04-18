@@ -21,7 +21,6 @@ class Index extends React.Component {
     render() {
         return(
             <Layout>
-                <Heading>Welcome to PEACH Cancer!</Heading>
                 <p>Some body text goes here</p>
             </Layout>
         )

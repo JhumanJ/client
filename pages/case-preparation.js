@@ -32,6 +32,7 @@ const searchbar = (
 
 export default () => (
   <Layout>
+
         <Col xs={12} mdOffset={2} sm={10} smOffset={1} md={8}>
               <Panel header={searchbar}>
                 <PatientList/>

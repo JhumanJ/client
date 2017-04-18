@@ -1,9 +1,9 @@
-import {style} from 'glamor'
+import {style,hover,css} from 'glamor'
 import Link from 'next/link'
 
 export default ({children, ...props}) => (
     <Link prefetch {...props}>
-        <a className={styles.link} children={children}/>
+        <a className={css(styles.link)} children={children}/>
     </Link>
 )
 
@@ -12,13 +12,19 @@ const styles = {
         display: 'block',
         padding: '15px 25px',
         color: 'white',
-        fontFamily: 'Helvetica Neue, sans-serif',
+        fontFamily: 'Lato, sans-serif',
         cursor: 'pointer',
         textDecoration: 'none',
         fontSize: '13px',
-
         ':hover': {
-            background: 'rgba(0, 0, 0, .1)'
+            background: 'rgba(0, 0, 0, .1)',
+            color: '#FECA45',
+            textDecoration: 'none'
+        },
+        ':active': {
+            background: 'rgba(0, 0, 0, .1)',
+            color: '#FECA45',
+            textDecoration: 'none'
         }
-    })
+    }),
 }
