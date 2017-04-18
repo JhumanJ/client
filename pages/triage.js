@@ -1,7 +1,10 @@
 import Layout from '../components/Layout'
+import Scheduler from '../components/Scheduler'
 
 export default () => (
-  <Layout requireAuth>
-    <p>Triage</p>
-  </Layout>
+    <Layout requireAuth>
+        <div>
+            <Scheduler/>
+        </div>
+    </Layout>
 )
