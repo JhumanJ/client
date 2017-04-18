@@ -1,9 +1,9 @@
 import {style} from 'glamor'
 import Link from 'next/link'
 
-export default ({children, ...props}) => (
+export default ({children, active, ...props}) => (
   <Link prefetch {...props}>
-    <a className={styles.link} children={children} />
+    <a className={`${styles.link} ${active && styles.active}`} children={children} />
   </Link>
 )
 
@@ -30,5 +30,10 @@ const styles = {
       color: '#FECA45',
       textDecoration: 'none'
     }
+  }),
+
+  active: style({
+    color: '#FECA45',
+    background: 'rgba(0, 0, 0, .1)'
   })
 }
