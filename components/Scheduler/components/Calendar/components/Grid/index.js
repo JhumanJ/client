@@ -110,7 +110,7 @@ var Grid = React.createClass({
 			var list;
 			if(currentMeeting != null && currentMeeting != undefined){
 				list = currentMeeting["specialities"].map((specialty, i)=>
-					<Button className={styles.btn_marg} bsStyle="primary" onClick={()=>addPatientsToGrid(currentPatient, currentMeeting, specialty["name"], year, month, day)}>{specialty["name"]}</Button>
+					<Button bsClass={styles.btn_marg + " btn btn-primary"} bsStyle="primary" onClick={()=>addPatientsToGrid(currentPatient, currentMeeting, specialty["name"], year, month, day)}>{specialty["name"]}</Button>
 				);
 			}
 			return list;
@@ -119,7 +119,7 @@ var Grid = React.createClass({
 
 		var fromMeetingToSpecialtyButtons = this.props.dayEvent.meeting.map(function(meet){
 			return (
-				<Button className={styles.btn_marg} bsStyle="primary" onClick={()=>that.fromMeetingToSpecialty(meet)}>{meet["title"]}</Button>
+				<Button bsClass={styles.btn_marg + " btn btn-primary"} bsStyle="primary" onClick={()=>that.fromMeetingToSpecialty(meet)}>{meet["title"]}</Button>
 			);
 		});
 
@@ -167,7 +167,7 @@ var Grid = React.createClass({
 
 			return (
 				<div className={styles.cell_container}>
-					{this.props.children}
+					<div className="text-right">{this.props.children}</div>
 					<div>
 					{modalMeeting}
 					</div>
@@ -197,7 +197,7 @@ var Grid = React.createClass({
 					    >
 					      <Modal.Header closeButton>
 					        	<Modal.Title id="contained-modal-title">
-									Choose Patient
+									Choose Speciality
 								</Modal.Title>
 					      </Modal.Header>
 					      <Modal.Body>
