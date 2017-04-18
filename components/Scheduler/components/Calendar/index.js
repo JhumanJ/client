@@ -33,6 +33,7 @@ var Calendar = React.createClass({
         var compareMeetings = function(meeting1, meeting2){
             return (meeting1["meeting_occurence_id"] === meeting2["meeting_occurence_id"] && meeting1["meeting_id"] === meeting2["meeting_id"] && meeting1["occurence_date"] === meeting2["occurence_date"] && meeting1["title"] === meeting2["title"] && meeting1["starting_time"] === meeting2["starting_time"] && meeting1["ending_time"] === meeting2["ending_time"] && meeting1["created_at"] === meeting2["created_at"])
         }
+        var that = this;
         axios.get(url).then(function(response){
             meetings = response.data;
             for(var i = 0; i < meetings.length; i++){
@@ -78,10 +79,11 @@ var Calendar = React.createClass({
                     found = 0;
                 }
             }
+            that.setState({
+                events : events
+            })
         })
-        this.setState({
-            events : events
-        })
+        
 
     },
     componentDidMount: function () {
