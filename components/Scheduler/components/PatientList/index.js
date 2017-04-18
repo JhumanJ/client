@@ -31,9 +31,11 @@ var PatientList = React.createClass({
 		var patientlisting = this.state.patients.map((patient, i)=>{
 			return(
 				<div>
-					<ListGroupItem>
-						<Patient name={patient.name} age={patient.age} id={i} removeFromList={this.props.removeFromList}/>
-						<button className={styles.btn_marg} className={"btn btn-danger btn-xs "+styles.btn_delete_patient} onClick={()=>{this.toggleModal(i)}}> <i className="fa fa-trash-o" aria-hidden="true"></i> </button>
+					<ListGroupItem bsClass={styles.listHover + " list-group-item"}>
+						<div>
+							<Patient name={patient.name} age={patient.age} id={i} removeFromList={this.props.removeFromList}/>
+							<button className={styles.btn_marg} className={"btn btn-danger btn-xs "+styles.btn_delete_patient} onClick={()=>{this.toggleModal(i)}}> <i className="fa fa-trash-o" aria-hidden="true"></i> </button>
+						</div>
 					</ListGroupItem>
 				</div>
 			);
@@ -107,7 +109,12 @@ const styles = {
         width: '22px',
         top: '6px',
         borderRadius: '3px'
-    })
+    }),
+	listHover: style({
+		':hover': {
+			backgroundColor: 'rgba(0,0,0,0.1)'
+		}
+	})
 }
 
 export default PatientList;

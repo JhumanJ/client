@@ -123,34 +123,50 @@ var Grid = React.createClass({
 			);
 		});
 
+
 		var modalMeeting = this.props.dayEvent.meeting.map((meet, i)=>{
+
+			var my_className;
+			switch (meet['meeting_id']) {
+				case 20:
+					my_className = styles.btn_meeting1;
+					break;
+				case 21:
+					my_className = styles.btn_meeting2;
+					break;
+				default:
+					my_className = styles.btn_meeting3;
+			}
+
 			return (
 				<div>
-				<button className={styles.btn_meeting} onClick={()=>this.toggleModal2(meet)}>{meet["title"].length<10?meet["title"]:meet["title"].substring(0,10)+"..."}</button>
-				<Modal
-					show={this.state.specialtyModalIsOpen && this.state.interestedMeeting === meet}
-					onHide={this.toggleModal}
-					container={this}
-					aria-labelledby="contained-modal-title"
-				>
-				<Modal.Header closeButton>
-					<Modal.Title id="contained-modal-title">
-						Patients Assignment
-					</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-					{specialtyListing(meet["specialities"], this.state.interestedMeeting, meet["title"], this.props.removeFromGrid, this.props.addPatient, this.props.year, this.props.month, this.props.day)}
-				</Modal.Body>
-				<Modal.Footer>
-					<Button className={styles.btn_marg} onClick={this.toggleModal}>Close</Button>
-				</Modal.Footer>
-				</Modal>
+					<div className={styles.btn_container}>
+						<button className={my_className} onClick={()=>this.toggleModal2(meet)}>{meet["title"].length<10?meet["title"]:meet["title"].substring(0,10)+"..."}</button>
+					</div>
+					<Modal
+						show={this.state.specialtyModalIsOpen && this.state.interestedMeeting === meet}
+						onHide={this.toggleModal}
+						container={this}
+						aria-labelledby="contained-modal-title"
+					>
+					<Modal.Header closeButton>
+						<Modal.Title id="contained-modal-title">
+							Patients Assignment
+						</Modal.Title>
+					</Modal.Header>
+					<Modal.Body>
+						{specialtyListing(meet["specialities"], this.state.interestedMeeting, meet["title"], this.props.removeFromGrid, this.props.addPatient, this.props.year, this.props.month, this.props.day)}
+					</Modal.Body>
+					<Modal.Footer>
+						<Button className={styles.btn_marg} onClick={this.toggleModal}>Close</Button>
+					</Modal.Footer>
+					</Modal>
 				</div>
 			);
 		});
 
 			return (
-				<div>
+				<div className={styles.cell_container}>
 					{this.props.children}
 					<div>
 					{modalMeeting}
@@ -232,15 +248,44 @@ const styles = {
         top: '6px',
         borderRadius: '3px'
     }),
-	btn_meeting: style({
+	btn_meeting1: style({
 		maxWidth: '100%',
 		padding: '5px',
 		margin: '5px',
 		border: 'none',
 	    borderRadius: '0px',
-	    backgroundColor: '#1abc9c',
-	    color: 'white',
+	    backgroundColor: '#EAFAE4',
+	    color: 'black',
+		borderBottom: 'solid 3px #9DEF80'
     }),
+	btn_meeting2: style({
+		maxWidth: '100%',
+		padding: '5px',
+		margin: '5px',
+		border: 'none',
+	    borderRadius: '0px',
+	    backgroundColor: '#FBEDDE',
+	    color: 'black',
+		borderBottom: 'solid 3px #F5B15A'
+    }),
+	btn_meeting3: style({
+		maxWidth: '100%',
+		padding: '5px',
+		margin: '5px',
+		border: 'none',
+	    borderRadius: '0px',
+	    backgroundColor: '#E0EFFC',
+	    color: 'black',
+		borderBottom: 'solid 3px #61BCF8'
+    }),
+	cell_container: style({
+		padding: '5px',
+		maxWidth: '100%',
+		maxHeight: '100%'
+	}),
+	btn_container: style({
+		position: 'relative'
+	})
 }
 
 export default DropTarget(ItemTypes.PATIENT, gridTarget, collect)(Grid);

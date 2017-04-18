@@ -81,7 +81,7 @@ var Calendar = React.createClass({
             }
             that.setState({
                 events : events
-            })      
+            })
         })
     },
     componentDidMount: function () {
@@ -449,7 +449,7 @@ var MonthDates = React.createClass({
                             }
 
                             return (
-                                <div className={className} role="button" tabIndex="0" onClick={that.props.onSelect.bind(that, that.props.year, that.props.month, d)}><Grid dayEvent={dayEvent} removeFromGrid={that.props.removeFromGrid} addPatients={that.props.addPatients} year={that.props.year} month={that.props.month} day={d} addPatient={that.props.addPatient}>{d}</Grid></div>
+                                <div className={className + "text-right"} role="button" tabIndex="0" onClick={that.props.onSelect.bind(that, that.props.year, that.props.month, d)}><Grid dayEvent={dayEvent} removeFromGrid={that.props.removeFromGrid} addPatients={that.props.addPatients} year={that.props.year} month={that.props.month} day={d} addPatient={that.props.addPatient}>{d}</Grid></div>
 
                             );
                         }
