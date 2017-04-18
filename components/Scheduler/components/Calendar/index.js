@@ -1,8 +1,7 @@
 import React from 'react';
 import Grid from './components/Grid';
 import axios from 'axios';
-import lodash from 'lodash';
-let isEqual = lodash.isequal;
+import isEqual from 'lodash.isequal';
 var _ = require('underscore');
 
 import {css} from 'glamor';
