@@ -126,7 +126,7 @@ var Grid = React.createClass({
 		var modalMeeting = this.props.dayEvent.meeting.map((meet, i)=>{
 			return (
 				<div>
-				<button className={styles.btn_meeting + " center-block"} onClick={()=>this.toggleModal2(meet)}>{meet["title"].substring(0,8) + "..."}</button>
+				<button className={styles.btn_meeting} onClick={()=>this.toggleModal2(meet)}>{meet["title"].length<10?meet["title"]:meet["title"].substring(0,10)+"..."}</button>
 				<Modal
 					show={this.state.specialtyModalIsOpen && this.state.interestedMeeting === meet}
 					onHide={this.toggleModal}
@@ -233,11 +233,13 @@ const styles = {
         borderRadius: '3px'
     }),
 	btn_meeting: style({
+		maxWidth: '100%',
+		padding: '5px',
+		margin: '5px',
 		border: 'none',
-	    borderRadius: '3px',
+	    borderRadius: '0px',
 	    backgroundColor: '#1abc9c',
 	    color: 'white',
-	    margin: '2px'
     }),
 }
 
