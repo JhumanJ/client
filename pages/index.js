@@ -2,7 +2,7 @@ import React from 'react'
 import withRedux from 'next-redux-wrapper'
 import {initStore, startClock} from '../store'
 import Layout from '../components/Layout'
-import {P, Heading} from '../components/Text'
+import { Heading} from '../components/Text'
 
 class Index extends React.Component {
     static getInitialProps({store, isServer}) {
@@ -22,7 +22,7 @@ class Index extends React.Component {
         return(
             <Layout>
                 <Heading>Welcome to PEACH Cancer!</Heading>
-                <P>Some body text goes here</P>
+                <p>Some body text goes here</p>
             </Layout>
         )
     }

@@ -28,6 +28,8 @@ h6 {
 }
 
 p {
-  margin: 0 0 10px;
+  margin-bottom: '15px';
   font-family: 'Open Sans', sans-serif;
+  color: '#232325';
+  font-size: '13px';
 }
