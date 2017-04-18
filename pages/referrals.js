@@ -14,7 +14,7 @@ import {style} from 'glamor'
 // ]
 
 export default () => (
-  <Layout>
+  <Layout requireAuth>
     <Tabs id='controlled-tab-example'>
       <Tab eventKey={1} title={<span><i className='fa fa-plus' aria-hidden='true' /> New Referral </span>}>
         <div className={styles.tabcontainer}>

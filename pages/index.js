@@ -1,11 +1,12 @@
 import React from 'react'
 import {initStore} from '../store'
+import Router from 'next/router'
 import withRedux from 'next-redux-wrapper'
+import {isLoggedIn} from '../services/auth'
 import Layout from '../components/Layout'
 
 class Index extends React.Component {
   static getInitialProps ({store, isServer}) {
-    console.log('store', store.getState())
     return {isServer}
   }
 
@@ -15,7 +16,7 @@ class Index extends React.Component {
 
   render () {
     return (
-      <Layout>
+      <Layout requireAuth>
         <p>Some body text goes here</p>
       </Layout>
     )
