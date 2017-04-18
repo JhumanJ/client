@@ -1,7 +1,15 @@
+import React from 'react'
 import Layout from '../components/Layout'
+import withRedux from 'next-redux-wrapper'
+import {initStore} from '../store'
 
-export default () => (
-  <Layout>
-    <p>login</p>
-  </Layout>
-)
+class Login extends React.Component {render() {
+    return (
+      <Layout>
+        <p>login</p>
+      </Layout>
+    )
+  }
+}
+
+export default withRedux(initStore)(Login)

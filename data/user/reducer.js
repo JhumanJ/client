@@ -52,9 +52,7 @@ export default (state = init, action) => {
     case a.SET_HARDCODED_USER:
       return {
         ...state,
-        name: action.user.name,
-        role: action.user.role,
-        openEHRSessionId: action.user.openEHRSessionId
+        ...action.user
       }
     default:
       return state
