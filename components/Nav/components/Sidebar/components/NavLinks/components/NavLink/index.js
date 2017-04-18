@@ -1,34 +1,34 @@
-import {style,hover,css} from 'glamor'
+import {style} from 'glamor'
 import Link from 'next/link'
 
 export default ({children, ...props}) => (
-    <Link prefetch {...props}>
-        <a className={css(styles.link)} children={children}/>
-    </Link>
+  <Link prefetch {...props}>
+    <a className={styles.link} children={children} />
+  </Link>
 )
 
 const styles = {
-    link: style({
-        '&, :focus': {
-            display: 'block',
-            padding: '15px 25px',
-            color: 'white',
-            fontFamily: 'Lato, sans-serif',
-            cursor: 'pointer',
-            textDecoration: 'none',
-            fontSize: '13px',
-        },
+  link: style({
+    '&, :focus': {
+      display: 'block',
+      padding: '15px 25px',
+      color: 'white',
+      fontFamily: 'Lato, sans-serif',
+      cursor: 'pointer',
+      textDecoration: 'none',
+      fontSize: '13px'
+    },
 
-        ':hover': {
-            background: 'rgba(0, 0, 0, .1)',
-            color: '#FECA45',
-            textDecoration: 'none'
-        },
+    ':hover': {
+      background: 'rgba(0, 0, 0, .1)',
+      color: '#FECA45',
+      textDecoration: 'none'
+    },
 
-        ':active': {
-            background: 'rgba(0, 0, 0, .1)',
-            color: '#FECA45',
-            textDecoration: 'none'
-        }
-    }),
+    ':active': {
+      background: 'rgba(0, 0, 0, .1)',
+      color: '#FECA45',
+      textDecoration: 'none'
+    }
+  })
 }

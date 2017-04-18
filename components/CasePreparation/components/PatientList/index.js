@@ -1,4 +1,3 @@
-import styles from './styles.css'
 import {ListGroup, ListGroupItem} from 'react-bootstrap'
 
 export default (props) => (

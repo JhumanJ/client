@@ -20,19 +20,19 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"/>
-          <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" crossorigin="anonymous"/>
-          <link href="https://fonts.googleapis.com/css?family=Lato|Lato:300|Open+Sans" rel="stylesheet"/>
-          <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"crossorigin="anonymous"/>
-          <link rel="stylesheet" href="static/css/styles.css"/>
+          <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css' />
+          <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' crossorigin='anonymous' />
+          <link href='https://fonts.googleapis.com/css?family=Lato|Lato:300|Open+Sans' rel='stylesheet' />
+          <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet'crossorigin='anonymous' />
+          <link rel='stylesheet' href='static/css/styles.css' />
           <title>PEACH Cancer</title>
           <style dangerouslySetInnerHTML={{ __html: this.props.css }} />
 
-          <link rel="icon" type="image/png" href="static/img/favicon.png" />
+          <link rel='icon' type='image/png' href='static/img/favicon.png' />
         </Head>
         <body>
-          <Main/>
-          <NextScript/>
+          <Main />
+          <NextScript />
         </body>
       </html>
     )

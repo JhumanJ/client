@@ -1,6 +1,5 @@
 import React from 'react'
 import Head from 'next/head'
-import Link from 'next/link'
 import Router from 'next/router'
 import NProgress from 'nprogress'
 
@@ -10,10 +9,6 @@ Router.onRouteChangeStart = (url) => {
 }
 Router.onRouteChangeComplete = () => NProgress.done()
 Router.onRouteChangeError = () => NProgress.done()
-
-const linkStyle = {
-  margin: '0 10px 0 0'
-}
 
 export default () => (
   <div>
