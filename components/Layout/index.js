@@ -1,7 +1,7 @@
 import {initStore} from '../../store'
 import {Provider} from 'react-redux'
 import {rehydrate} from 'glamor'
-import Auth from '../Auth'
+// import Auth from '../Auth'
 import Loader from '../Loader'
 import Nav from '../Nav'
 
@@ -14,9 +14,9 @@ if (typeof window !== 'undefined') {
 
 export default ({children, requireAuth = false, ...props}) => (
   <Provider store={initStore()}>
-    <Auth requireAuth={requireAuth} {...props}>
+    <div requireAuth={requireAuth} {...props}>
       <Loader />
       <Nav children={children} />
-    </Auth>
+    </div>
   </Provider>
 )
