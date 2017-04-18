@@ -1,6 +1,5 @@
 import React from 'react'
 import {initStore} from '../store'
-import Router from 'next/router'
 import withRedux from 'next-redux-wrapper'
 import {isLoggedIn} from '../services/auth'
 import Layout from '../components/Layout'
