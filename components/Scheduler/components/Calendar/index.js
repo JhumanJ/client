@@ -79,12 +79,10 @@ var Calendar = React.createClass({
                     found = 0;
                 }
             }
-            
+            that.setState({
+                events : events
+            })      
         })
-        that.setState({
-            events : events
-        })
-
     },
     componentDidMount: function () {
 
@@ -144,7 +142,7 @@ var Calendar = React.createClass({
                         date: d,
                         year: d.getFullYear(),
                         month: d.getMonth(),
-                        day: d.getDate()-1,
+                        day: d.getDate(),
                         meeting: []
                     };
                     newEventTest.meeting.push(meetings[i]);
@@ -152,7 +150,7 @@ var Calendar = React.createClass({
                 }
                 else{
                     for(var j = 0; j < events.length; j++){
-                        if(d.getFullYear() === events[j].year && d.getMonth() === events[j].month && d.getDate()-1 === events[j].day){
+                        if(d.getFullYear() === events[j].year && d.getMonth() === events[j].month && d.getDate() === events[j].day){
                             found = 1;
                             var alreadyExists = false
                             for(var k = 0; k < events[j].meeting.length; k++){
@@ -170,7 +168,7 @@ var Calendar = React.createClass({
                             date: d,
                             year: d.getFullYear(),
                             month: d.getMonth(),
-                            day: d.getDate()-1,
+                            day: d.getDate(),
                             meeting: []
                         };
                         newEventTest.meeting.push(meetings[i]);
@@ -215,7 +213,7 @@ var Calendar = React.createClass({
                         date: d,
                         year: d.getFullYear(),
                         month: d.getMonth(),
-                        day: d.getDate()-1,
+                        day: d.getDate(),
                         meeting: []
                     };
                     newEventTest.meeting.push(meetings[i]);
@@ -223,7 +221,7 @@ var Calendar = React.createClass({
                 }
                 else{
                     for(var j = 0; j < events.length; j++){
-                        if(d.getFullYear() === events[j].year && d.getMonth() === events[j].month && d.getDate()-1 === events[j].day){
+                        if(d.getFullYear() === events[j].year && d.getMonth() === events[j].month && d.getDate() === events[j].day){
                             found = 1;
                             var alreadyExists = false
                             for(var k = 0; k < events[j].meeting.length; k++){
@@ -241,7 +239,7 @@ var Calendar = React.createClass({
                             date: d,
                             year: d.getFullYear(),
                             month: d.getMonth(),
-                            day: d.getDate()-1,
+                            day: d.getDate(),
                             meeting: []
                         };
                         newEventTest.meeting.push(meetings[i]);
