@@ -1,7 +1,10 @@
 import Layout from '../components/Layout'
+import Scheduler from '../components/Scheduler'
 
 export default () => (
     <Layout>
-        <p>Triage</p>
+        <div>
+            <Scheduler/>
+        </div>
     </Layout>
 )
