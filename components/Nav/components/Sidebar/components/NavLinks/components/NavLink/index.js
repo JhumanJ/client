@@ -9,18 +9,22 @@ export default ({children, ...props}) => (
 
 const styles = {
     link: style({
-        display: 'block',
-        padding: '15px 25px',
-        color: 'white',
-        fontFamily: 'Lato, sans-serif',
-        cursor: 'pointer',
-        textDecoration: 'none',
-        fontSize: '13px',
+        '&, :focus': {
+            display: 'block',
+            padding: '15px 25px',
+            color: 'white',
+            fontFamily: 'Lato, sans-serif',
+            cursor: 'pointer',
+            textDecoration: 'none',
+            fontSize: '13px',
+        },
+
         ':hover': {
             background: 'rgba(0, 0, 0, .1)',
             color: '#FECA45',
             textDecoration: 'none'
         },
+
         ':active': {
             background: 'rgba(0, 0, 0, .1)',
             color: '#FECA45',
