@@ -155,7 +155,13 @@ var Grid = React.createClass({
 						</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
+						<div>
+							<p>Meeting starting time: {meet["starting_time"].replace(/(.*)\D\d+/, '$1')}</p>
+							<p>Meeting ending time: {meet["ending_time"].replace(/(.*)\D\d+/, '$1')}</p>
+						</div>
+						<div>
 						{specialtyListing(meet["specialities"], this.state.interestedMeeting, meet["title"], this.props.removeFromGrid, this.props.addPatient, this.props.year, this.props.month, this.props.day)}
+						</div>
 					</Modal.Body>
 					<Modal.Footer>
 						<Button className={styles.btn_marg} onClick={this.toggleModal}>Close</Button>
