@@ -342,9 +342,9 @@ var Header = React.createClass({
     render: function () {
         return (
             <div className="rrow rhead">
-                <div className={"rcell "+styles.greyhover} onClick={this.props.onPrev.bind(this)} role="button" tabIndex="0"><i className="fa fa-caret-left" aria-hidden="true"></i></div>
+                <div className={"rcell "+styles.greyhover} onClick={this.props.onPrev.bind(null, this)} role="button" tabIndex="0"><i className="fa fa-caret-left" aria-hidden="true"></i></div>
                 <div className="rcell">{this.props.monthNames[this.props.month]}&nbsp;{this.props.year}</div>
-                <div className={"rcell "+ styles.greyhover} onClick={this.props.onNext.bind(this)} role="button" tabIndex="0"><i className="fa fa-caret-right" aria-hidden="true"></i></div>
+                <div className={"rcell "+ styles.greyhover} onClick={this.props.onNext.bind(null, this)} role="button" tabIndex="0"><i className="fa fa-caret-right" aria-hidden="true"></i></div>
             </div>
         );
     }
@@ -449,7 +449,7 @@ var MonthDates = React.createClass({
                             }
 
                             return (
-                                <div className={className} role="button" tabIndex="0" onClick={that.props.onSelect.bind(that, that.props.year, that.props.month, d)}><Grid dayEvent={dayEvent} removeFromGrid={that.props.removeFromGrid} addPatients={that.props.addPatients} year={that.props.year} month={that.props.month} day={d} addPatient={that.props.addPatient}>{d}</Grid></div>
+                                <div className={className} role="button" tabIndex="0" onClick={that.props.onSelect.bind(null, that, that.props.year, that.props.month, d)}><Grid dayEvent={dayEvent} removeFromGrid={that.props.removeFromGrid} addPatients={that.props.addPatients} year={that.props.year} month={that.props.month} day={d} addPatient={that.props.addPatient}>{d}</Grid></div>
 
                             );
                         }
