@@ -10,6 +10,7 @@ const init = {
 }
 
 export default (state = init, action) => {
+  console.log('action', action)
   switch (action.type) {
     case a.GET_USER_REQUEST:
       return {

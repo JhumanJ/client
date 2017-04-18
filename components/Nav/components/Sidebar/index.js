@@ -3,10 +3,10 @@ import Masthead from './components/Masthead'
 import LoginDropdown from './components/LoginDropdown'
 import NavLinks from './components/NavLinks'
 
-export default ({user, ...props}) => (
+export default ({user, setHardcodedUser, ...props}) => (
   <div className={styles.container} {...props}>
     <Masthead />
-    <LoginDropdown name={user.name} />
+    <LoginDropdown user={user} setHardcodedUser={setHardcodedUser} />
     <div className={styles.divider} />
     <NavLinks />
   </div>
