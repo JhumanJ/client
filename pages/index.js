@@ -1,30 +1,25 @@
 import React from 'react'
+import {initStore} from '../store'
 import withRedux from 'next-redux-wrapper'
-import {initStore, startClock} from '../store'
 import Layout from '../components/Layout'
-import { Heading} from '../components/Text'
 
 class Index extends React.Component {
-    static getInitialProps({store, isServer}) {
-        store.dispatch({type: 'TICK', light: !isServer, ts: Date.now()})
-        return {isServer}
-    }
+  static getInitialProps ({store, isServer}) {
+    console.log('store', store.getState())
+    return {isServer}
+  }
 
-    componentDidMount() {
-        this.timer = this.props.dispatch(startClock())
-    }
+  componentDidMount () {}
 
-    componentWillUnmount() {
-        clearInterval(this.timer)
-    }
+  componentWillUnmount () {}
 
-    render() {
-        return(
-            <Layout>
-                <p>Some body text goes here</p>
-            </Layout>
-        )
-    }
+  render () {
+    return (
+      <Layout>
+        <p>Some body text goes here</p>
+      </Layout>
+    )
+  }
 }
 
 export default withRedux(initStore)(Index)

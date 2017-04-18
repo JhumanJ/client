@@ -1,5 +1,6 @@
-import React from 'react'
-import {style, rehydrate} from 'glamor'
+import {initStore} from '../../store'
+import {Provider} from 'react-redux'
+import {rehydrate} from 'glamor'
 import Loader from '../Loader'
 import Nav from '../Nav'
 
@@ -11,8 +12,10 @@ if (typeof window !== 'undefined') {
 }
 
 export default ({children, ...props}) => (
+  <Provider store={initStore()}>
     <div {...props}>
-        <Loader/>
-        <Nav children={children}/>
+      <Loader />
+      <Nav children={children} />
     </div>
+  </Provider>
 )
