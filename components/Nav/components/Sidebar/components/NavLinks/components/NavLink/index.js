@@ -1,11 +1,14 @@
 import {style} from 'glamor'
 import Link from 'next/link'
 
-export default ({children, active, ...props}) => (
-  <Link prefetch {...props}>
-    <a className={`${styles.link} ${active && styles.active}`} children={children} />
-  </Link>
-)
+export default ({children, href, ...props}) => {
+  const isActive = false
+  return (
+    <Link href={href} prefetch {...props}>
+      <a className={`${styles.link} ${isActive && styles.active}`} children={children} />
+    </Link>
+  )
+}
 
 const styles = {
   link: style({
