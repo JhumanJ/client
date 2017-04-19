@@ -6,11 +6,12 @@ export default ({primary, ...props}) => <button className={primary ? styles().pr
 const styles = () => {
   const normal = style({
     display: 'inline-block',
-    padding: '5px 10px 6px',
+    padding: '4px 10px 5px',
     boxSizing: 'border-box',
     border: 0,
     background: '#f4f4f4',
     cursor: 'pointer',
+    transition: '150ms',
 
     ':hover': {
       background: '#e5e5e5'
@@ -23,11 +24,12 @@ const styles = () => {
   })
 
   const primary = merge(normal, {
-    background: '#202D38',
+    background: '#2E3F4F',
     color: 'white',
+    borderRadius: '3px',
 
     ':hover': {
-      background: '#404D58'
+      background: '#4E5F7F'
     },
 
     ':disabled': {

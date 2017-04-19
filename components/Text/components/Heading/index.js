@@ -4,7 +4,7 @@ export default (props) => <h1 className={styles.h1} {...props} />
 
 const styles = {
   h1: style({
-    fontSize: '3em',
+    fontSize: '22px',
     fontFamily: 'Lato, sans-serif',
     color: 'black',
     fontWeight: '400',
