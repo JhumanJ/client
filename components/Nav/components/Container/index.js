@@ -7,9 +7,7 @@ export default (props) => (
 
 const styles = {
   container: style({
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'stretch',
+    
     minHeight: '100vh'
   })
 }

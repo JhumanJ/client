@@ -10,8 +10,8 @@ export default ({title, detail, ...props}) => (
 const styles = {
     container: style({
         padding: '10px',
-        background: 'none',
-        border: '1px solid #bbb',
+        background: 'white',
+        border: '1px solid #ddd',
         transition: '150ms',
         borderRadius: '3px',
         marginBottom: '5px',

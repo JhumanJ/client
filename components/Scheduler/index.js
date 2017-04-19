@@ -50,10 +50,10 @@ var Scheduler = React.createClass({
   render: function() {
     return (
       <div className="App">
-        <Col xs={12} sm={10} md={4} smOffset={1} mdOffset={0}>
+        <Col xs={12} sm={10} md={3} smOffset={1} mdOffset={0}>
             <PatientList patients={this.state.patients} name="List of Patients" removeFromList={this.removeFromList}/>
         </Col>
-        <Col xs={12} sm={10} md={8} smOffset={1} mdOffset={0}>
+        <Col xs={12} sm={10} md={9} smOffset={1} mdOffset={0}>
             <Calendar addPatient={this.addPatient}/>
         </Col>
       </div>

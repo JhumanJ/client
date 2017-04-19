@@ -14,6 +14,7 @@ export default ({user, setHardcodedUser, ...props}) => (
 
 const styles = {
   container: style({
+    position: 'fixed',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'stretch',

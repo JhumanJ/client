@@ -16,4 +16,5 @@ const mapDispatchToProps = dispatch => ({
   setHardcodedUser: user => dispatch(setHardcodedUser(user))
 })
 
+
 export default connect(state => state, mapDispatchToProps)(Nav)

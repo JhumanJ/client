@@ -6,7 +6,7 @@ import {initStore} from '../store'
 class Login extends React.Component {render() {
     return (
       <Layout>
-        <p>login</p>
+        <p>Please login!</p>
       </Layout>
     )
   }
