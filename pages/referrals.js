@@ -4,6 +4,7 @@ import {initStore} from '../store'
 import Layout from '../components/Layout'
 import {Tabs, Tab, Col} from 'react-bootstrap'
 import {style} from 'glamor'
+import CreateNew from '../components/Referrals/components/CreateNew'
 
 class Referral extends React.Component {
   render() {
@@ -13,7 +14,7 @@ class Referral extends React.Component {
           <Tab eventKey={1} title={<span><i className='fa fa-plus' aria-hidden='true' /> New Referral </span>}>
             <div className={styles.tabcontainer}>
               <div className={'row'}>
-                <Col xs={12}>...a</Col>
+                <Col xs={12}><CreateNew/></Col>
               </div>
             </div>
           </Tab>
