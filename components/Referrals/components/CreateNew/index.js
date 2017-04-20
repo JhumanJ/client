@@ -2,6 +2,7 @@ import React from 'react'
 import {FormGroup, ControlLabel, FormControl, Button, Col} from 'react-bootstrap'
 import {connect} from 'react-redux'
 import axios from 'axios'
+import {css} from 'glamor'
 
 var data = require('./data.json')
 
@@ -42,12 +43,12 @@ class CreateNew extends React.Component {
     })
         .then(res => console.log(res))
         .catch(err => console.log(err))
+
   }
 
   render () {
     return (
       <form onSubmit={this.handleSubmit}>
-
         <Col xs={12} smOffset={1} sm={10}>
           <h2>Request</h2>
 
@@ -136,5 +137,6 @@ const mapStateToProps = (state) => {
   const {openEHRSessionId} = state.data.user
   return {openEHRSessionId}
 }
+
 
 export default connect(mapStateToProps)(CreateNew)

@@ -501,7 +501,7 @@ const styles = {
                 justifyContent: 'center'
             },
             '& .rhead':{
-                flexGrow: 1,
+                flexGrow: 0.33,
                 flexBasis: 0
             },
             '& .rprev':{
@@ -526,7 +526,7 @@ const styles = {
                 overflowWrap: 'break-word'
             },
             '& .rweekdays':{
-                flexGrow: 1,
+                flexGrow: 0.33,
                 flexBasis: 0,
             },
             '& .rweekdays .rcell':{
