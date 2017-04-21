@@ -5,7 +5,7 @@ const init = {
         id: null,
         name: '',
     },
-    openEhrId: '',
+    openEHRId: '',
     loading: true,
     error: false,
 }
@@ -25,7 +25,7 @@ export default (state = init, action) => {
         case a.GET_OPEN_EHR_ID_SUCCESS:
             return {
                 ...state,
-                openEhrId: action.res.openEhrId,
+                openEHRId: action.request.data.ehrId,
                 loading: false,
             }
         case a.GET_OPEN_EHR_ID_FAILURE:

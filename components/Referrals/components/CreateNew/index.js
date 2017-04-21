@@ -5,7 +5,7 @@ import axios from 'axios'
 import {css} from 'glamor'
 import NewPatient from './components/NewPatient'
 import SelectPatient from './components/SelectPatient'
-
+import {storeReferral} from '../../../../data/referral/actions'
 
 var data = require('./data.json')
 
@@ -48,17 +48,18 @@ class CreateNew extends React.Component {
 
   handleSubmit (e) {
     e.preventDefault()
+    const {userId, openEHRId, storeReferral} = this.props
 
-    axios.post(`https://ehrscape.code4health.org/rest/v1/composition?ehrId=64effb89-9b52-4614-8cad-b11a4dad0e5a&templateId=OpenCancer+Urology+MDT+Referral+Form.v0&committerName=uclpeach&format=FLAT`, {...data, ...this.state}, {
+    axios.post(`https://ehrscape.code4health.org/rest/v1/composition?ehrId=${openEHRId}&templateId=OpenCancer+Urology+MDT+Referral+Form.v0&committerName=uclpeach&format=FLAT`, {...data, ...this.state}, {
       headers: {
         Authorization: 'Basic dWNscGVhY2hfYzRoOlFXeFBwYnl3',
         'EHr-Session-disabled': this.props.openEHRSessionId,
         'Content-Type': 'application/json'
       }
     })
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
-
+      .then(res => console.log(res))
+      .then(() => storeReferral(userId, openEHRId))
+      .catch(err => console.log(err))
   }
 
   render () {
@@ -182,10 +183,15 @@ class CreateNew extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const {openEHRSessionId} = state.data.user
-  return {openEHRSessionId}
-}
+const mapStateToProps = (state) => ({
+  openEHRSessionId: state.data.user.openEHRSessionId,
+  userId: state.data.user.id,
+  openEHRId: state.data.referral.openEHRId,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  storeReferral: (referrerId, EHRId) => dispatch(storeReferral(referrerId, EHRId))
+})
 
 const styles = {
     header: css({
@@ -206,4 +212,4 @@ const styles = {
 }
 
 
-export default connect(mapStateToProps)(CreateNew)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateNew)

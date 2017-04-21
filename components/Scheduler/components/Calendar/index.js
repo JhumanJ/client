@@ -379,6 +379,7 @@ var Calendar = React.createClass({
                                             }
                                     }, config)
                                                        
+
                                 }
                                 else{
                                     events[i].meeting[j]["specialities"][k]["patients"] = [];
@@ -454,7 +455,7 @@ var Calendar = React.createClass({
     render: function () {
         console.log(this.state.events);
         return (
-            <div className={" row " + styles.rcalendar}>
+            <div className={styles.rcalendar}>
                 <div className="rinner">
                     <Header monthNames={this.state.monthNamesFull} month={this.state.month} year={this.state.year} onPrev={this.getPrev} onNext={this.getNext} />
                     <WeekDays dayNames={this.state.dayNames} startDay={this.state.startDay} weekNumbers={this.state.weekNumbers} />
@@ -605,6 +606,7 @@ const styles = {
             width: '100%',
             marginRight: '0px',
             marginLeft: '0px',
+            height: '90vh',
             '& *':{
                 MozBoxSizing: 'border-box',
                 WebkitBoxSizing: 'border-box',
