@@ -3,6 +3,7 @@ import * as a from './actions'
 const init = {
     jobs: [],
     loading: false,
+    jobLoading: false,
     error: false,
 }
 
@@ -29,17 +30,18 @@ export default (state = init, action) => {
         case a.DELETE_JOB_REQUEST:
             return {
                 ...state,
+                jobLoading: action.id,
             }
         case a.DELETE_JOB_SUCCESS:
             return {
                 ...state,
                 jobs: state.jobs.filter(job => job.job_id !== action.id),
-                loading: false,
+                jobLoading: false,
             }
         case a.DELETE_JOB_FAILURE:
             return {
                 ...state,
-                loading: false,
+                jobLoading: false,
                 error: action.error,
             }
         default:

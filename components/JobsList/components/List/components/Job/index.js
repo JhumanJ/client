@@ -1,7 +1,7 @@
 import {style} from 'glamor'
 
-export default ({title, detail, onDelete, ...props}) => (
-    <div className={styles.container}>
+export default ({title, detail, onDelete, loading, ...props}) => (
+    <div className={`${styles.container} ${loading && styles.loading}`}>
         <h4>{title}</h4>
         <p className={styles.detail}>{detail}</p>
         <button
@@ -25,6 +25,11 @@ const styles = {
             background: 'dodgerblue',
             color: 'white',
         },
+    }),
+
+    loading: style({
+        pointerEvents: 'none',
+        opacity: .6,
     }),
 
     detail: style({

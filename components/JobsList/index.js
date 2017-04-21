@@ -9,7 +9,7 @@ class JobsList extends React.Component {
     }
 
     render() {
-        const {jobs, loading, getJobs, deleteJob} = this.props
+        const {jobs, loading, jobLoading, getJobs, deleteJob} = this.props
         return (
             <div>
                 <Masthead
@@ -17,6 +17,7 @@ class JobsList extends React.Component {
                     refresh={getJobs}/>
                 <List
                     loading={loading}
+                    jobLoading={jobLoading}
                     jobs={jobs}
                     onDelete={deleteJob}/>
             </div>
@@ -27,6 +28,7 @@ class JobsList extends React.Component {
 const mapStateToProps = (state) => ({
     jobs: state.data.jobs.jobs,
     loading: state.data.jobs.loading,
+    jobLoading: state.data.jobs.jobLoading,
 })
 
 const mapDispatchToProps = (dispatch) => ({

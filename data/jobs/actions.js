@@ -13,7 +13,7 @@ export const DELETE_JOB_FAILURE = 'DELETE_JOB_FAILURE'
 const getJobsRequest = () => ({type: GET_JOBS_REQUEST})
 const getJobsSuccess = (response) => ({type: GET_JOBS_SUCCESS, response})
 const getJobsFailure = (error) => ({type: GET_JOBS_FAILURE, error})
-const deleteJobRequest = () => ({type: DELETE_JOB_REQUEST})
+const deleteJobRequest = (id) => ({type: DELETE_JOB_REQUEST, id})
 const deleteJobSuccess = (id) => ({type: DELETE_JOB_SUCCESS, id})
 const deleteJobFailure = (error) => ({type: DELETE_JOB_FAILURE, error})
 
@@ -27,7 +27,7 @@ export const getJobs = () => (
 )
 
 export const deleteJob = (id) => dispatch => {
-    dispatch(deleteJobRequest())
+    dispatch(deleteJobRequest(id))
     axios.delete(DELETE_API(id))
         .then(() => dispatch(deleteJobSuccess(id)))
         .catch(err => dispatch(deleteJobFailure(err)))
