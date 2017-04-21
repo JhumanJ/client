@@ -4,6 +4,7 @@ import Grid from './components/Calendar/components/Grid';
 import HTML5Backend from 'react-dnd-html5-backend';
 import {DragDropContext} from 'react-dnd';
 import Calendar from './components/Calendar';
+import {connect} from 'react-redux'
 import {Col} from 'react-bootstrap';
 import axios from 'axios';
 
@@ -16,6 +17,7 @@ var Scheduler = React.createClass({
       patients:  []
     };
   },
+
 
   componentWillMount: function(){
     var that = this;
@@ -39,6 +41,11 @@ var Scheduler = React.createClass({
       }
     })
   },
+
+  componentWillMount: function() {
+    const openEHRSessionId = this.props.openEHRSessionId
+  }
+
 
   removeFromList: function(index){
     var array = this.state.patients;
@@ -65,11 +72,13 @@ var Scheduler = React.createClass({
             <PatientList patients={this.state.patients} name="List of Patients" removeFromList={this.removeFromList}/>
         </Col>
         <Col xs={12} sm={10} md={9} smOffset={1} mdOffset={0}>
-            <Calendar addPatient={this.addPatient}/>
+            <Calendar openEHRSessionId={this.props.openEHRSessionId} addPatient={this.addPatient}/>
         </Col>
       </div>
     );
   }
 });
 
-export default DragDropContext(HTML5Backend)(Scheduler);
+const mapStateToProps = (state) => ({openEHRSessionId: state.data.user.openEHRSessionId})
+
+export default connect(mapStateToProps)(DragDropContext(HTML5Backend)(Scheduler));

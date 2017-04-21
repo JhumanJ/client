@@ -71,7 +71,6 @@ class CreateNew extends React.Component {
 
         <Col xs={12} smOffset={1} sm={10}>
 
-
           <h2>Select Patient</h2>
 
           <Button bsStyle="primary" onClick={this.open}>

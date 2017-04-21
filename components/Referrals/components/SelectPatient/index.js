@@ -10,12 +10,14 @@ export default (props) => {
             </Head>
             <Select.Async
                 loadOptions={(input) => {
+                    console.log('input', input)
                     return axios.get('https://api.github.com/users/benjaminhadfield/repos')
                         .then(res => res.json())
                         .then(json => {
                             console.log('json', json)
-                            json.map(repo => ({value: repo.id, label: repo.name}))
+                            return {options: json.map(repo => ({value: repo.id, label: repo.name}))}
                         })
+                        .catch(err => console.err('react-select couldn\'t fetch data!', err))
                 }}
                 isLoading={true}
                 onChange={(e) => console.log(e)}
