@@ -1,5 +1,5 @@
 import React from 'react'
-import {FormGroup, ControlLabel, FormControl, Button, Col} from 'react-bootstrap'
+import {FormGroup, ControlLabel, FormControl, Button, Col, Modal} from 'react-bootstrap'
 import {connect} from 'react-redux'
 import axios from 'axios'
 import {css} from 'glamor'
@@ -20,11 +20,23 @@ class CreateNew extends React.Component {
       'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/cancer_mdt_referral_details:0/reviews_required:0|code': '',
       'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/cancer_mdt_referral_details:0/special_mdt_office_instructions': '',
       'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/cancer_mdt_referral_details:0/date_symptoms_first_noticed': '',
-      'mdt_referral/general/cancer_mdt_-_urology_referral/individual_professional_demographics_uk:0/person_name/requested_by': ''
+      'mdt_referral/general/cancer_mdt_-_urology_referral/individual_professional_demographics_uk:0/person_name/requested_by': '',
+      showModal: false
     }
     this.state = this.initialState
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.open = this.open.bind(this)
+    this.close = this.close.bind(this)
+  }
+
+  close() {
+    this.setState({ showModal: false });
+  }
+
+  open() {
+    this.setState({ showModal: true });
+    console.log(this.state);
   }
 
   handleChange (e) {
@@ -60,9 +72,22 @@ class CreateNew extends React.Component {
 
           <h2>Select Patient</h2>
 
-        //   insert react-select here
+          <Button bsStyle="primary" onClick={this.open}>
+                <i className='fa fa-plus' aria-hidden='true' /> Add new patient
+          </Button>
 
-        //   modal btn to add
+          <Modal show={this.state.showModal} onHide={this.close}>
+              <Modal.Header closeButton>
+                <Modal.Title>Create a new Patient</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <h4>Text in a modal</h4>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button onClick={this.close}>Close</Button>
+              </Modal.Footer>
+         </Modal>
+
 
           <h2 className={styles.marg30Top}>Request</h2>
 
