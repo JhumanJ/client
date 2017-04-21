@@ -3,6 +3,8 @@ import {FormGroup, ControlLabel, FormControl, Button, Col, Modal} from 'react-bo
 import {connect} from 'react-redux'
 import axios from 'axios'
 import {css} from 'glamor'
+import NewPatient from './components/NewPatient'
+
 
 var data = require('./data.json')
 
@@ -46,7 +48,7 @@ class CreateNew extends React.Component {
   handleSubmit (e) {
     e.preventDefault()
 
-    axios.post(`https://ehrscape.code4health.org//rest/v1/composition?ehrId=64effb89-9b52-4614-8cad-b11a4dad0e5a&templateId=OpenCancer+Urology+MDT+Referral+Form.v0&committerName=uclpeach&format=FLAT`, {...data, ...this.state}, {
+    axios.post(`https://ehrscape.code4health.org/rest/v1/composition?ehrId=64effb89-9b52-4614-8cad-b11a4dad0e5a&templateId=OpenCancer+Urology+MDT+Referral+Form.v0&committerName=uclpeach&format=FLAT`, {...data, ...this.state}, {
       headers: {
         Authorization: 'Basic dWNscGVhY2hfYzRoOlFXeFBwYnl3',
         'EHr-Session-disabled': `sessionId ${this.props.openEHRSessionId}`,
@@ -81,10 +83,10 @@ class CreateNew extends React.Component {
                 <Modal.Title>Create a new Patient</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <h4>Text in a modal</h4>
+                <NewPatient/>
               </Modal.Body>
               <Modal.Footer>
-                <Button onClick={this.close}>Close</Button>
+                <Button onClick={this.close}>Cancel</Button>
               </Modal.Footer>
          </Modal>
 
@@ -92,7 +94,7 @@ class CreateNew extends React.Component {
           <h2 className={styles.marg30Top}>Request</h2>
 
           <FormGroup controlId='mdt_meeting'>
-            <ControlLabel>* MDT meeting</ControlLabel>
+            <ControlLabel>MDT meeting</ControlLabel>
             <FormControl onChange={this.handleChange} name='mdt_referral/general/cancer_mdt_-_urology_referral/request:0/mdt_meeting' type='text' placeholder='Identification of the service requested, by name.' />
           </FormGroup>
 
