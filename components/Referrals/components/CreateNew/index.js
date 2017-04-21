@@ -1,8 +1,10 @@
 import React from 'react'
-import {FormGroup, ControlLabel, FormControl, Button, Col} from 'react-bootstrap'
+import {FormGroup, ControlLabel, FormControl, Button, Col, Modal} from 'react-bootstrap'
 import {connect} from 'react-redux'
 import axios from 'axios'
 import {css} from 'glamor'
+import NewPatient from './components/NewPatient'
+
 
 var data = require('./data.json')
 
@@ -20,11 +22,23 @@ class CreateNew extends React.Component {
       'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/cancer_mdt_referral_details:0/reviews_required:0|code': '',
       'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/cancer_mdt_referral_details:0/special_mdt_office_instructions': '',
       'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/cancer_mdt_referral_details:0/date_symptoms_first_noticed': '',
-      'mdt_referral/general/cancer_mdt_-_urology_referral/individual_professional_demographics_uk:0/person_name/requested_by': ''
+      'mdt_referral/general/cancer_mdt_-_urology_referral/individual_professional_demographics_uk:0/person_name/requested_by': '',
+      showModal: false
     }
     this.state = this.initialState
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.open = this.open.bind(this)
+    this.close = this.close.bind(this)
+  }
+
+  close() {
+    this.setState({ showModal: false });
+  }
+
+  open() {
+    this.setState({ showModal: true });
+    console.log(this.state);
   }
 
   handleChange (e) {
@@ -34,7 +48,7 @@ class CreateNew extends React.Component {
   handleSubmit (e) {
     e.preventDefault()
 
-    axios.post(`https://ehrscape.code4health.org//rest/v1/composition?ehrId=64effb89-9b52-4614-8cad-b11a4dad0e5a&templateId=OpenCancer+Urology+MDT+Referral+Form.v0&committerName=uclpeach&format=FLAT`, {...data, ...this.state}, {
+    axios.post(`https://ehrscape.code4health.org/rest/v1/composition?ehrId=64effb89-9b52-4614-8cad-b11a4dad0e5a&templateId=OpenCancer+Urology+MDT+Referral+Form.v0&committerName=uclpeach&format=FLAT`, {...data, ...this.state}, {
       headers: {
         Authorization: 'Basic dWNscGVhY2hfYzRoOlFXeFBwYnl3',
         'EHr-Session-disabled': `sessionId ${this.props.openEHRSessionId}`,
@@ -47,13 +61,40 @@ class CreateNew extends React.Component {
   }
 
   render () {
+
     return (
       <form onSubmit={this.handleSubmit}>
+
+        <div className={styles.header}>
+            <img className={styles.headerImg} src="/static/img/referral/referral.jpg"/>
+        </div>
+
         <Col xs={12} smOffset={1} sm={10}>
-          <h2>Request</h2>
+
+
+          <h2>Select Patient</h2>
+
+          <Button bsStyle="primary" onClick={this.open}>
+                <i className='fa fa-plus' aria-hidden='true' /> Add new patient
+          </Button>
+
+          <Modal show={this.state.showModal} onHide={this.close}>
+              <Modal.Header closeButton>
+                <Modal.Title>Create a new Patient</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <NewPatient/>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button onClick={this.close}>Cancel</Button>
+              </Modal.Footer>
+         </Modal>
+
+
+          <h2 className={styles.marg30Top}>Request</h2>
 
           <FormGroup controlId='mdt_meeting'>
-            <ControlLabel>* MDT meeting</ControlLabel>
+            <ControlLabel>MDT meeting</ControlLabel>
             <FormControl onChange={this.handleChange} name='mdt_referral/general/cancer_mdt_-_urology_referral/request:0/mdt_meeting' type='text' placeholder='Identification of the service requested, by name.' />
           </FormGroup>
 
@@ -89,7 +130,7 @@ class CreateNew extends React.Component {
             <FormControl onChange={this.handleChange} name='mdt_referral/general/cancer_mdt_-_urology_referral/request:0/specific_date_for_mdt_review' type='datetime-local' placeholder='The date/time, or acceptable interval of date/time, for provision of the service.' />
           </FormGroup>
 
-          <h2>Cancer MDT referral details</h2>
+          <h2 className={styles.marg30Top}>Cancer MDT referral details</h2>
 
           <FormGroup controlId='mdt_schedule'>
             <ControlLabel>MDT schedule</ControlLabel>
@@ -118,14 +159,14 @@ class CreateNew extends React.Component {
             <FormControl onChange={this.handleChange} name='mdt_referral/general/cancer_mdt_-_urology_referral/request:0/cancer_mdt_referral_details:0/date_symptoms_first_noticed' type='datetime-local' placeholder='Date when patient first experienced symptoms.' />
           </FormGroup>
 
-          <h2>Person Name</h2>
+          <h2 className={styles.marg30Top}>Person Name</h2>
 
           <FormGroup controlId='requested_by'>
             <ControlLabel>Requested by</ControlLabel>
             <FormControl onChange={this.handleChange} name='mdt_referral/general/cancer_mdt_-_urology_referral/individual_professional_demographics_uk:0/person_name/requested_by' type='text' placeholder='Name in free text unstructured format.' />
           </FormGroup>
 
-          <Button bsStyle='primary' type='submit' children='Submit' />
+          <Button bsStyle='primary' type='submit'><i className='fa fa-plus' aria-hidden='true' /> Add Referral</Button>
         </Col>
 
       </form>
@@ -136,6 +177,24 @@ class CreateNew extends React.Component {
 const mapStateToProps = (state) => {
   const {openEHRSessionId} = state.data.user
   return {openEHRSessionId}
+}
+
+const styles = {
+    header: css({
+        width: '100%',
+        border: '1px solid #ddd',
+        borderRadius: '3px',
+        height: '250px',
+        backgound: 'url()',
+        overflow: 'hidden',
+        marginBottom: '30px'
+    }),
+    headerImg: css({
+        width: '100%'
+    }),
+    marg30Top: css({
+        marginTop: '30px'
+    })
 }
 
 

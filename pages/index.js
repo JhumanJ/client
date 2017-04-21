@@ -1,16 +1,16 @@
 import React from 'react'
 import {initStore} from '../store'
-import WithAuth from '../components/WithAuth'
+import withAuth from '../enhancers/withAuth'
 import Layout from '../components/Layout'
 
 class Index extends React.Component {
   render () {
     return (
       <Layout>
-        <p>Some body text goes here...</p>
+        <p>Welcome!</p>
       </Layout>
     )
   }
 }
 
-export default WithAuth(initStore)(Index)
+export default withAuth(initStore)(Index)

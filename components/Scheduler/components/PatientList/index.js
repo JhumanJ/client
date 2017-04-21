@@ -54,6 +54,24 @@ var PatientList = React.createClass({
 				<div>
 					<h3>{this.props.name}</h3>
 					<h3> - </h3>
+
+				<Modal
+				      show={this.state.deleteModalIsOpen}
+				      onHide={this.toggleModal}
+				      container={this}
+				      aria-labelledby="contained-modal-title"
+				    >
+				      <Modal.Header closeButton>
+				        	<Modal.Title id="contained-modal-title">
+								Are you sure you want to delete the patient from the patient list?
+							</Modal.Title>
+				      </Modal.Header>
+				      <Modal.Body>
+						  <Button bsClass={styles.btn_marg + " btn btn-primary"} onClick={()=>this.toggleModal()}>No</Button>
+						  <Button bsClass={styles.btn_marg + " btn btn-danger"} onClick={()=>this.deleteFromModal(this.state.currentIndex)}>Yes</Button>
+				      </Modal.Body>
+				</Modal>
+
 				</div>
 			)
 		}

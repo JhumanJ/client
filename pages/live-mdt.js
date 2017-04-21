@@ -1,6 +1,6 @@
 import React from 'react'
 import {initStore} from '../store'
-import WithAuth from '../components/WithAuth'
+import withAuth from '../enhancers/withAuth'
 import Layout from '../components/Layout'
 
 class LiveMDT extends React.Component {
@@ -13,4 +13,4 @@ class LiveMDT extends React.Component {
   }
 }
 
-export default WithAuth(initStore)(LiveMDT)
+export default withAuth(initStore)(LiveMDT)

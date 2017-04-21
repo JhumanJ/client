@@ -20,12 +20,16 @@ const getOpenEhrSessionIdSuccess = (response) => ({type: GET_OPEN_EHR_SESSION_ID
 const getOpenEhrSessionIdFailure = (error) => ({type: GET_OPEN_EHR_SESSION_ID_FAILURE, error})
 
 // Action Api
-export const setHardcodedUser = (user) => ({type: SET_HARDCODED_USER, user})
+export const setHardcodedUser = user => dispatch => {
+  dispatch(getOpenEhrSessionId())
+  dispatch({type: SET_HARDCODED_USER, user})
+}
 export const getUser = (authToken) => {
   return dispatch => {
     dispatch(getUserRequest())
     axios.post('/api/user', {authToken})
       .then(res => dispatch(getUserSuccess(res)))
+      .then(() => dispatch(getOpenEhrSessionId()))
       .catch(err => dispatch(getUserFailure(err)))
   }
 }
