@@ -277,7 +277,6 @@ var Calendar = React.createClass({
     },
 
     getPatients: function(meeting, year, month, day){
-        var events = this.state.events;
         var that = this;
         const openEHRSessionId = this.props.openEHRSessionId;
         const url = "http://peachteam35.uksouth.cloudapp.azure.com:8080/api/patient_assignments/meeting_occurence/" + meeting["meeting_occurence_id"];
@@ -302,6 +301,7 @@ var Calendar = React.createClass({
                 var patient_assignment_id = meetings[i]["patient_assigment_id"];
                 var referral_id = meetings[i]["referral_id"];
                 axios.get(ehrURL, configEHR).then(function(res){
+                    var events = that.state.events;
                     var patient = res.data.party;
                     patient["patient_assignment_id"] = patient_assignment_id;
                     patient["ehrID"] = ehrID;
@@ -311,14 +311,22 @@ var Calendar = React.createClass({
                             if(_.isEqual(meeting, events[l].meeting[j])){
                                 for(var k = 0; k < events[l].meeting[j]["specialities"].length; k++){
                                     if(events[l].meeting[j]["specialities"][k]["speciality_id"] == specialityID){
-                                        if(events[l].meeting[j]["specialities"][k].hasOwnProperty("patients")){
+                                        if(events[l].meeting[j].specialities[k].hasOwnProperty("patients")){
                                             var alreadyExists = false;
+                                            var similarIndex = null;
                                             for(var m = 0; m < events[l].meeting[j]["specialities"][k]["patients"].length; m++){
                                                 if(events[l].meeting[j]["specialities"][k]["patients"][m]["firstNames"] == patient["firstNames"] && events[l].meeting[j]["specialities"][k]["patients"][m]["lastNames"] == patient["lastNames"] && events[l].meeting[j]["specialities"][k]["patients"][m]["gender"] == patient["gender"] && events[l].meeting[j]["specialities"][k]["patients"][m]["dateOfBirth"] == patient["dateOfBirth"]){
-                                                    alreadyExists = true;
+                                                    similarIndex = m;
+                                                    if(events[l].meeting[j]["specialities"][k]["patients"][m]["patient_assignment_id"] == patient["patient_assignment_id"]){
+                                                        alreadyExists = true;
+                                                    }
                                                 }
                                             }
-                                            if(!alreadyExists){
+                                            if(!alreadyExists && events[l].meeting[j].specialities[k].patients.length != 0){
+                                                console.log("HERE!")
+                                                if(events[l].meeting[j]["specialities"][k]["patients"][similarIndex].hasOwnProperty("patient_assignment_id")){
+                                                    events[l].meeting[j]["specialities"][k]["patients"].splice(similarIndex,1); 
+                                                }
                                                 events[l].meeting[j]["specialities"][k]["patients"].push(patient);
                                             } 
                                         }
@@ -339,14 +347,12 @@ var Calendar = React.createClass({
             
 
         })
-        console.log("Current patients");
-        console.log(this.state.events);
     },
 
 
     addPatients: function(patient, meeting2, specialty2, year, month, day){
         var events = this.state.events;
-        console.log(events);
+        var that = this;
         const openEHRSessionId = this.props.openEHRSessionId;
         const baseurl = "http://peachteam35.uksouth.cloudapp.azure.com:8080/api/patient_assignments/";
         const config = {
@@ -375,13 +381,15 @@ var Calendar = React.createClass({
 
                                         }
                                     },config)
-                                    console.log("PUTURL")
-                                    console.log(putURL + patient["referral_id"] );
                                     axios.put(putURL + patient["referral_id"] , {
                                             "Referral":{
                                                 "status": 1
                                             }
-                                    }, config)
+                                    }, config).then(function(response){
+                                        that.setState({
+                                            events: events
+                                        })
+                                    })
                                                        
 
                                 }
@@ -400,7 +408,11 @@ var Calendar = React.createClass({
                                         "Referral":{
                                             "status": 1
                                         }
-                                    }, config)
+                                    }, config).then(function(response){
+                                        that.setState({
+                                            events: events
+                                        })
+                                    })
 
                                 }
                             }
@@ -411,9 +423,6 @@ var Calendar = React.createClass({
             }
         }
         //theres no way theres a patient without meeting, REMOVE THIS
-        this.setState({
-            events : events
-        })
     },
 
     removeFromGrid: function(index, meeting2, specialty2, year, month, day){
@@ -436,6 +445,8 @@ var Calendar = React.createClass({
                         for(var k = 0; k < events[i].meeting[j]["specialities"].length; k++){
                             if(events[i].meeting[j]["specialities"][k]["name"] === specialty2){
                                 var patient = events[i].meeting[j]["specialities"][k]["patients"][index];
+                                console.log(patient);
+                                console.log("PUTURL2", putURL + patient["referral_id"] )
                                 axios.delete(deleteURL + patient["patient_assignment_id"])
                                 axios.put(putURL + patient["referral_id"] , {
                                     "Referral":{
@@ -455,7 +466,6 @@ var Calendar = React.createClass({
     },
 
     render: function () {
-        console.log(this.state.events);
         return (
             <div className={styles.rcalendar}>
                 <div className="rinner">
