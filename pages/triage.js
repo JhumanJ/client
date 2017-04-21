@@ -7,7 +7,7 @@ import Scheduler from '../components/Scheduler'
 class Triage extends React.Component {
     render() {
         return (
-            <Layout>
+            <Layout activePage={this.props.pathname}>
                 <div>
                     <Scheduler/>
                 </div>

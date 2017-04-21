@@ -30,7 +30,7 @@ class CasePreparation extends React.Component {
     )
 
     return (
-      <Layout>
+      <Layout activePage={this.props.pathname}>
         <Col xs={12} mdOffset={2} sm={10} smOffset={1} md={8}>
           <Panel header={searchbar}>
             <PatientList />

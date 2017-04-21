@@ -46,7 +46,6 @@ class CreateNew extends React.Component {
   }
 
   handleChange (e) {
-
     var data = this.state.data;
     data[e.target.name] = e.target.value;
     this.setState({ data });
@@ -55,8 +54,6 @@ class CreateNew extends React.Component {
   handleSubmit (e) {
     e.preventDefault()
     const {userId, openEHRId, storeReferral} = this.props
-
-    console.log({...data, ...this.state.data});
 
     axios.post(`https://ehrscape.code4health.org/rest/v1/composition?ehrId=${openEHRId}&templateId=OpenCancer+Urology+MDT+Referral+Form.v0&committerName=uclpeach&format=FLAT`, {...data, ...this.state.data}, {
       headers: {
@@ -69,8 +66,8 @@ class CreateNew extends React.Component {
       .then(() => storeReferral(userId, openEHRId))
       .catch(err => console.log(err))
 
-       let myColor = { background: '#2e3f4f', text: "#FFFFFF" };
-       notify.show('Patient created in openEHR!', "custom", 3000, myColor);
+      let myColor = { background: '#2e3f4f', text: "#FFFFFF" };
+      notify.show('Patient referred!', "custom", 3000, myColor);
   }
 
   render () {
