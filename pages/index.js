@@ -6,7 +6,7 @@ import Layout from '../components/Layout'
 class Index extends React.Component {
   render () {
     return (
-      <Layout>
+      <Layout activePage={this.props.pathname}>
         <p>Welcome!</p>
       </Layout>
     )

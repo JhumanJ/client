@@ -7,7 +7,7 @@ import CreateJob from '../components/CreateJob'
 class Confirmation extends React.Component {
   render() {
     return (
-      <Layout>
+      <Layout activePage={this.props.pathname}>
         <CreateJob/>
       </Layout>
     )

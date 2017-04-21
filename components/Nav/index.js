@@ -5,9 +5,9 @@ import Sidebar from './components/Sidebar'
 import {setHardcodedUser} from '../../data/user/actions'
 
 // Pass in state data
-const Nav = ({children, data, setHardcodedUser, ...props}) => (
+const Nav = ({children, data, setHardcodedUser, activePage, ...props}) => (
   <Container>
-    <Sidebar user={data.user} setHardcodedUser={setHardcodedUser} />
+    <Sidebar user={data.user} setHardcodedUser={setHardcodedUser} activePage={activePage} />
     <Page children={children} />
   </Container>
 )

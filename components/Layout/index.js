@@ -10,10 +10,10 @@ if (typeof window !== 'undefined') {
   rehydrate(window.__NEXT_DATA__.ids)
 }
 
-export default ({children, ...props}) => (
+export default ({children, activePage, ...props}) => (
   <div {...props}>
     <Loader />
-    <Nav children={children} />
+    <Nav activePage={activePage} children={children} />
     <Notifications />
   </div>
 )

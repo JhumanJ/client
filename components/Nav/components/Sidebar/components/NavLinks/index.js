@@ -1,17 +1,19 @@
 import {style} from 'glamor'
 import NavLink from './components/NavLink'
 
-export default (props) => (
+export default ({activePage, ...props}) => {
+  console.log('AP:', activePage)
+  return (
   <div className={styles.container}>
-    <NavLink href='/'>Home</NavLink>
-    <NavLink href='/referrals'>Referrals</NavLink>
-    <NavLink href='/triage'>Triage</NavLink>
-    <NavLink href='/case-preparation'>Case Preparation</NavLink>
-    <NavLink href='/live-mdt'>Live MDT</NavLink>
-    <NavLink href='/confirmation'>Confirmation</NavLink>
-    <NavLink href='/jobs'>Jobs</NavLink>
+    <NavLink active={activePage === '/'} href='/'>Home</NavLink>
+    <NavLink active={activePage === '/referrals'} href='/referrals'>Referrals</NavLink>
+    <NavLink active={activePage === '/triage'} href='/triage'>Triage</NavLink>
+    <NavLink active={activePage === '/case-preparation'} href='/case-preparation'>Case Preparation</NavLink>
+    <NavLink active={activePage === '/live-mdt'} href='/live-mdt'>Live MDT</NavLink>
+    <NavLink active={activePage === '/confirmation'} href='/confirmation'>Confirmation</NavLink>
+    <NavLink active={activePage === '/jobs'} href='/jobs'>Jobs</NavLink>
   </div>
-)
+)}
 
 const styles = {
   container: style({

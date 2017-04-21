@@ -7,7 +7,7 @@ import JobsList from '../components/JobsList'
 class Jobs extends React.Component {
   render() {
     return (
-      <Layout>
+      <Layout activePage={this.props.pathname}>
         <JobsList/>
       </Layout>
     )
