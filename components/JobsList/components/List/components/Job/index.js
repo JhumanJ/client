@@ -1,9 +1,9 @@
 import {style} from 'glamor'
 
-export default ({title, detail, onDelete, loading, ...props}) => (
+export default ({title, comment, onDelete, loading, ...props}) => (
     <div className={`${styles.container} ${loading && styles.loading}`}>
         <h4>{title}</h4>
-        <p className={styles.detail}>{detail}</p>
+        <p className={styles.comment}>{comment}</p>
         <button
             className={styles.button}
             onClick={onDelete}
@@ -32,7 +32,7 @@ const styles = {
         opacity: .6,
     }),
 
-    detail: style({
+    comment: style({
         margin: 0,
     }),
 

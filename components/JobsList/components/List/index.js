@@ -9,7 +9,7 @@ export default ({jobs, onDelete, loading, jobLoading, ...props}) => (
                 title={job.title}
                 loading={loading || jobLoading === job.job_id}
                 onDelete={() => onDelete(job.job_id)}
-                detail={job.comment} />
+                comment={job.comment} />
         )
     }
     </ul>
