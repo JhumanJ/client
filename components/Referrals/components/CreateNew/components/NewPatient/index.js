@@ -2,6 +2,8 @@ import React from 'react'
 import {Panel, FormGroup, InputGroup, FormControl, Button, Col, ControlLabel} from 'react-bootstrap'
 import {css} from 'glamor'
 import axios from 'axios'
+import Notifications, {notify} from 'react-notify-toast';
+
 
 class NewPatient extends React.Component {
 
@@ -78,6 +80,8 @@ class NewPatient extends React.Component {
           })
           .catch(err => console.log("Err in 1st request"+err))
 
+          let myColor = { background: '#2e3f4f', text: "#FFFFFF" };
+          notify.show('Patient created in openEHR!', "custom", 3000, myColor);
           this.props.close();
 
     }

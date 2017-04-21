@@ -17,8 +17,7 @@ export const getOpenEHRId = (patientId, openEHRSessionId) => (dispatch) => {
     console.log('openEHRSessionId', openEHRSessionId)
     console.log('pID', patientId)
     dispatch(getOpenEHRIdRequest())
-    fetch(`https://ehrscape.code4health.org/rest/v1/ehr/?subjectId=${patientId}&subjectNamespace=uk.nhs.nhs_number`, {
-        method: 'GET',
+    axios.get(`https://ehrscape.code4health.org/rest/v1/ehr/?subjectId=${patientId}&subjectNamespace=uk.nhs.nhs_number`, {
         headers: {
             Authorization: 'Basic dWNscGVhY2hfYzRoOlFXeFBwYnl3',
             'EHr-Session-disabled': openEHRSessionId,
