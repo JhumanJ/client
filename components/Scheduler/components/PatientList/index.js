@@ -57,8 +57,8 @@ var PatientList = React.createClass({
 							</Modal.Title>
 				      </Modal.Header>
 				      <Modal.Body>
-						  <Button className={styles.btn_marg} bsStyle="danger" onClick={()=>this.deleteFromModal(this.state.currentIndex)}>Yes</Button>
-						  <Button className={styles.btn_marg} bsStyle="primary" onClick={()=>this.toggleModal()}>No</Button>
+						  <Button bsClass={styles.btn_marg + " btn btn-primary"} onClick={()=>this.toggleModal()}>No</Button>
+						  <Button bsClass={styles.btn_marg + " btn btn-danger"} onClick={()=>this.deleteFromModal(this.state.currentIndex)}>Yes</Button>
 				      </Modal.Body>
 				</Modal>
 				</div>

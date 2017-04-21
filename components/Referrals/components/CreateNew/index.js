@@ -47,8 +47,14 @@ class CreateNew extends React.Component {
   }
 
   render () {
+
     return (
       <form onSubmit={this.handleSubmit}>
+
+        <div className={styles.header}>
+            <img className={styles.headerImg} src="/static/img/referral/referral.jpg"/>
+        </div>
+
         <Col xs={12} smOffset={1} sm={10}>
           <h2>Request</h2>
 
@@ -89,7 +95,7 @@ class CreateNew extends React.Component {
             <FormControl onChange={this.handleChange} name='mdt_referral/general/cancer_mdt_-_urology_referral/request:0/specific_date_for_mdt_review' type='datetime-local' placeholder='The date/time, or acceptable interval of date/time, for provision of the service.' />
           </FormGroup>
 
-          <h2>Cancer MDT referral details</h2>
+          <h2 className={styles.marg30Top}>Cancer MDT referral details</h2>
 
           <FormGroup controlId='mdt_schedule'>
             <ControlLabel>MDT schedule</ControlLabel>
@@ -118,14 +124,14 @@ class CreateNew extends React.Component {
             <FormControl onChange={this.handleChange} name='mdt_referral/general/cancer_mdt_-_urology_referral/request:0/cancer_mdt_referral_details:0/date_symptoms_first_noticed' type='datetime-local' placeholder='Date when patient first experienced symptoms.' />
           </FormGroup>
 
-          <h2>Person Name</h2>
+          <h2 className={styles.marg30Top}>Person Name</h2>
 
           <FormGroup controlId='requested_by'>
             <ControlLabel>Requested by</ControlLabel>
             <FormControl onChange={this.handleChange} name='mdt_referral/general/cancer_mdt_-_urology_referral/individual_professional_demographics_uk:0/person_name/requested_by' type='text' placeholder='Name in free text unstructured format.' />
           </FormGroup>
 
-          <Button bsStyle='primary' type='submit' children='Submit' />
+          <Button bsStyle='primary' type='submit'><i className='fa fa-plus' aria-hidden='true' /> Add Referral</Button>
         </Col>
 
       </form>
@@ -136,6 +142,24 @@ class CreateNew extends React.Component {
 const mapStateToProps = (state) => {
   const {openEHRSessionId} = state.data.user
   return {openEHRSessionId}
+}
+
+const styles = {
+    header: css({
+        width: '100%',
+        border: '1px solid #ddd',
+        borderRadius: '3px',
+        height: '250px',
+        backgound: 'url()',
+        overflow: 'hidden',
+        marginBottom: '30px'
+    }),
+    headerImg: css({
+        width: '100%'
+    }),
+    marg30Top: css({
+        marginTop: '30px'
+    })
 }
 
 

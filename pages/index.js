@@ -7,7 +7,7 @@ class Index extends React.Component {
   render () {
     return (
       <Layout>
-        <p>Some body text goes here...</p>
+        <p>Welcome!</p>
       </Layout>
     )
   }
