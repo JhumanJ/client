@@ -33,7 +33,7 @@ const styles = {
     padding: '15px 25px',
   }),
   visibleOption: style({
-      color; 'black'
+      color: 'black'
   }),
   name: style({
     fontFamily: 'Lato, sans-serif',
