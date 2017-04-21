@@ -305,12 +305,20 @@ var Calendar = React.createClass({
                                 if(events[i].meeting[j]["specialities"][k].hasOwnProperty("patients")){
                                     events[i].meeting[j]["specialities"][k]["patients"].push(patient);
                                     /*axios.post(url, {
-                                        "patient": patient,
+                                        "patient": patient["referral_id"],
                                         "meeting_occurence_id": meeting2["meeting_occurence_id"],
                                         "speciality_id": events[i].meeting[j]["specialities"][k]["speciality_id"]
 
                                         WHATEVER necessary data,
+                                    })
+                                    axios.put(url, data:{
+                                        "Referral":{
+                                            "referred_by_id": patient["referred_by_id"],
+                                            "ehrID": patient["ehrID"],
+                                            "status": 1
+                                        }
                                     })*/
+        
                                 }
                                 else{
                                     events[i].meeting[j]["specialities"][k]["patients"] = [];

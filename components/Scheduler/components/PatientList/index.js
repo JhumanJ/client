@@ -42,7 +42,7 @@ var PatientList = React.createClass({
 				<div>
 					<ListGroupItem bsClass={styles.listHover + " list-group-item"}>
 						<div>
-							<Patient name={name} id={i} removeFromList={this.props.removeFromList}/>
+							<Patient patient={patient} name={name} id={i} removeFromList={this.props.removeFromList}/>
 							<button className={styles.btn_marg} className={"btn btn-danger btn-xs "+styles.btn_delete_patient} onClick={()=>{this.toggleModal(i)}}> <i className="fa fa-trash-o" aria-hidden="true"></i> </button>
 						</div>
 					</ListGroupItem>

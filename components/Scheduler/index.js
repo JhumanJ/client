@@ -22,18 +22,33 @@ var Scheduler = React.createClass({
   componentWillMount: function(){
     var that = this;
     var url = "http://peachteam35.uksouth.cloudapp.azure.com:8080/api/referrals/waiting";
+    const openEHRSessionId = this.props.openEHRSessionId;
+    const config = {
+      headers: {
+        Authorization: 'Basic dWNscGVhY2hfYzRoOlFXeFBwYnl3',
+        'EHr-Session-disabled': openEHRSessionId
+      }
+    };
     var patients = this.state.patients;
     axios.get(url).then(function(response){
       var ehrDetails = response.data;
-      console.log(ehrDetails);
       for(var i = 0; i < ehrDetails.length; i++){
-        var ehrID = ehrDetails[i]["ehrID"].substring(1, ehrDetails[i]["ehrID"].length-1)
+        var ehrID = ehrDetails[i]["ehrID"];
         var referralID = ehrDetails[i]["referral_id"];
+        var referredByID = ehrDetails[i]["referred_by_id"];
         var ehrURL = 'https://ehrscape.code4health.org/rest/v1/demographics/ehr/' + ehrID + '/party';
-        axios.get(ehrURL).then(function(response){
-          var patient = response.data;
+        axios.get(ehrURL, {
+          headers: {
+            Authorization: 'Basic dWNscGVhY2hfYzRoOlFXeFBwYnl3',
+            'EHr-Session-disabled': openEHRSessionId
+          }
+        }).then(function(response){
+          var patient = response.data.party;
           patient["referral_id"] = referralID;
+          patient["ehrID"] = ehrID;
+          patient["referred_by_id"] = referredByID;
           patients.push(patient);
+          console.log(patient);
           that.setState({
             patients: patients
           });
@@ -41,11 +56,6 @@ var Scheduler = React.createClass({
       }
     })
   },
-
-  componentWillMount: function() {
-    const openEHRSessionId = this.props.openEHRSessionId
-  }
-
 
   removeFromList: function(index){
     var array = this.state.patients;

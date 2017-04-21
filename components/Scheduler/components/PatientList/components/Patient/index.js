@@ -8,6 +8,7 @@ var patientSource = {
 		return {
 			name: props.name,
 			id: props.id,
+			patient: props.patient,
 			removeFromList: props.removeFromList
 		}
 	},
@@ -38,6 +39,7 @@ var Patient = React.createClass({
 		var isDragging = this.props.isDragging;
 		var name = this.props.name;
 		var id = this.props.id;
+		var patient=this.props.patient;
 		var removeFromList = this.props.removeFromList;
 
 		return connectDragSource(

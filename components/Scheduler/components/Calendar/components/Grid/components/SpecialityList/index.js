@@ -34,7 +34,7 @@ var SpecialtyList = React.createClass({
 				return(
 					<div>
 						<ListGroupItem>
-							<div id={i}>{patient["firstNames"]} {patient["lastNames"]}</div>
+							<div id={i}>{patient["firstNames"] + " " + patient["lastNames"]}</div>
 							<button className={"btn btn-danger btn-xs "+styles.btn_delete_patient} onClick={()=>this.addAndRemovePatient(patient,i,this.props.meeting, this.props.specialty, this.props.year, this.props.month, this.props.day)}> <i className="fa fa-trash-o" aria-hidden="true"></i> </button>
 						</ListGroupItem>
 
