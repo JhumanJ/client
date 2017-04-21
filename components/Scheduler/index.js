@@ -35,7 +35,7 @@ var Scheduler = React.createClass({
 
   componentWillMount: function() {
     const openEHRSessionId = this.props.openEHRSessionId
-  }
+  },
 
   removeFromList: function(index){
     var array = this.state.patients;
