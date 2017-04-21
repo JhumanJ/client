@@ -1,33 +1,27 @@
 import {connect} from 'react-redux'
 import Masthead from './components/Masthead'
 import List from './components/List'
-import {getJobs} from '../../data/jobs/actions'
+import {getJobs, deleteJob} from '../../data/jobs/actions'
 
-const jobsList = [
-    {
-        id: 3,
-        title: 'Some Title',
-        detail: 'Blah foo bar...'
-    },
-    {
-        id: 5,
-        title: 'Another Title',
-        detail: 'Blah foo bar...'
-    },
-    {
-        id: 10,
-        title: 'Yet Another Title',
-        detail: 'Blah foo bar...'
-    },
-]
+class JobsList extends React.Component {
+    componentDidMount() {
+        this.props.getJobs()
+    }
 
-const JobsList = ({jobs, loading, getJobs, ...props}) => {
-    return (
-        <div>
-            <Masthead loading={loading} refresh={getJobs}/>
-            <List loading={loading} jobs={jobsList}/>
-        </div>
-    )
+    render() {
+        const {jobs, loading, getJobs, deleteJob} = this.props
+        return (
+            <div>
+                <Masthead
+                    loading={loading}
+                    refresh={getJobs}/>
+                <List
+                    loading={loading}
+                    jobs={jobs}
+                    onDelete={deleteJob}/>
+            </div>
+        )
+    }
 }
 
 const mapStateToProps = (state) => ({
@@ -36,7 +30,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    getJobs: () => dispatch(getJobs())
+    getJobs: () => dispatch(getJobs()),
+    deleteJob: (id) => dispatch(deleteJob(id)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(JobsList)

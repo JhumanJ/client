@@ -16,11 +16,27 @@ export default (state = init, action) => {
         case a.GET_JOBS_SUCCESS:
             return {
                 ...state,
+                jobs: action.response.data,
                 loading: false,
                 error: false,
-                jobs: action.response.data.jobs,
             }
         case a.GET_JOBS_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.error,
+            }
+        case a.DELETE_JOB_REQUEST:
+            return {
+                ...state,
+            }
+        case a.DELETE_JOB_SUCCESS:
+            return {
+                ...state,
+                jobs: state.jobs.filter(job => job.job_id !== action.id),
+                loading: false,
+            }
+        case a.DELETE_JOB_FAILURE:
             return {
                 ...state,
                 loading: false,

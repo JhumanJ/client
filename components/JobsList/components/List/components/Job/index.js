@@ -1,9 +1,13 @@
 import {style} from 'glamor'
 
-export default ({title, detail, ...props}) => (
+export default ({title, detail, onDelete, ...props}) => (
     <div className={styles.container}>
         <h4>{title}</h4>
         <p className={styles.detail}>{detail}</p>
+        <button
+            className={styles.button}
+            onClick={onDelete}
+            children="Delete"/>
     </div>
 )
 
@@ -17,11 +21,23 @@ const styles = {
         marginBottom: '5px',
 
         ':hover': {
-            boxShadow: '0 1px 2px rgba(0, 0, 0, .16)',
-            background: '#e8e8e8',
+            boxShadow: '0 1px 2px rgba(0, 0, 0, .2)',
+            background: 'dodgerblue',
+            color: 'white',
         },
     }),
+
     detail: style({
         margin: 0,
-    })
+    }),
+
+    button: style({
+        background: 'red',
+        color: 'white',
+        border: 0,
+
+        ':hover': {
+            background: 'darkred',
+        },
+    }),
 }
