@@ -19,8 +19,16 @@ var PatientList = React.createClass({
 		});
 	},
 
-	deleteFromModal: function(index){
+	deleteFromModal: function(index, patient){
 		this.props.removeFromList(index);
+		//PUT REQUEST HERE status = -1
+		/*var url = "http://peachteam35.uksouth.cloudapp.azure.com:8080/api/referrals/" + patient["referral_id"];
+    	var that = this;
+    	axios.put(url,
+    		{ "status" = -1 }
+    	).then(function(response){  
+      		console.log(response);
+    	})*/
 		this.setState({
 			deleteModalIsOpen: !this.state.deleteModalIsOpen,
 			currentIndex: null
@@ -29,11 +37,12 @@ var PatientList = React.createClass({
 
 	render: function(){
 		var patientlisting = this.state.patients.map((patient, i)=>{
+			var name = patient["firstNames"] + " " + patient["lastNames"] ;
 			return(
 				<div>
 					<ListGroupItem bsClass={styles.listHover + " list-group-item"}>
 						<div>
-							<Patient name={patient.name} age={patient.age} id={i} removeFromList={this.props.removeFromList}/>
+							<Patient name={name} id={i} removeFromList={this.props.removeFromList}/>
 							<button className={styles.btn_marg} className={"btn btn-danger btn-xs "+styles.btn_delete_patient} onClick={()=>{this.toggleModal(i)}}> <i className="fa fa-trash-o" aria-hidden="true"></i> </button>
 						</div>
 					</ListGroupItem>
@@ -45,22 +54,6 @@ var PatientList = React.createClass({
 				<div>
 					<h3>{this.props.name}</h3>
 					<h3> - </h3>
-					<Modal
-				      show={this.state.deleteModalIsOpen}
-				      onHide={this.toggleModal}
-				      container={this}
-				      aria-labelledby="contained-modal-title"
-				    >
-				      <Modal.Header closeButton>
-				        	<Modal.Title id="contained-modal-title">
-								Are you sure you want to delete the patient from the patient list?
-							</Modal.Title>
-				      </Modal.Header>
-				      <Modal.Body>
-						  <Button className={styles.btn_marg} bsStyle="danger" onClick={()=>this.deleteFromModal(this.state.currentIndex)}>Yes</Button>
-						  <Button className={styles.btn_marg} bsStyle="primary" onClick={()=>this.toggleModal()}>No</Button>
-				      </Modal.Body>
-				</Modal>
 				</div>
 			)
 		}
@@ -88,7 +81,7 @@ var PatientList = React.createClass({
 							</Modal.Title>
 				      </Modal.Header>
 				      <Modal.Body>
-						  <Button className={styles.btn_marg} bsStyle="danger" onClick={()=>this.deleteFromModal(this.state.currentIndex)}>Yes</Button>
+						  <Button className={styles.btn_marg} bsStyle="danger" onClick={()=>this.deleteFromModal(this.state.currentIndex, this.state.patients[this.state.currentIndex])}>Yes</Button>
 						  <Button className={styles.btn_marg} bsStyle="primary" onClick={()=>this.toggleModal()}>No</Button>
 				      </Modal.Body>
 				</Modal>

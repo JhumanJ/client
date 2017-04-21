@@ -43,7 +43,8 @@ var Grid = React.createClass({
 			day: this.props.day,
 			month: this.props.month,
 			year: this.props.year,
-			interestedMeeting: null
+			interestedMeeting: null,
+			getPatients: false
 		};
 	},
 
@@ -77,10 +78,34 @@ var Grid = React.createClass({
 	},
 
 	toggleModal2: function(meeting){
+
+		//POST IS DONE HERE, MIGHT NEED MORETHAN ONE PARAMETER
 		this.setState({
 			specialtyModalIsOpen: true,
 			interestedMeeting: meeting
 		});
+		/*if(this.state.getPatients){
+			this.setState({
+				specialtyModalIsOpen: true,
+				interestedMeeting: meeting
+			});
+		}
+		else{
+			var url = "WHATEVER";
+			var that = this;
+			axios.get(url).then(function(response){
+				var patients = response.data;
+				//PARSE patients based on specialities
+				that.props.getPatients(whatever...)
+
+				that.setState({
+					specialtyModalIsOpen: true,
+					interestedMeeting: meeting,
+					getPatients: true
+				});
+			})
+		}*/
+
 	},
 
 	fromMeetingToSpecialty: function(meeting){

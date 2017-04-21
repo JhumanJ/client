@@ -7,7 +7,6 @@ var patientSource = {
 	beginDrag: function(props){
 		return {
 			name: props.name,
-			age: props.age,
 			id: props.id,
 			removeFromList: props.removeFromList
 		}
@@ -32,14 +31,12 @@ var Patient = React.createClass({
 	getDefaultProps: function(){
 		return {
 			name: 'John Doe',
-			age: 24
 		};
 	},
 	render : function(){
 		var connectDragSource = this.props.connectDragSource;
 		var isDragging = this.props.isDragging;
 		var name = this.props.name;
-		var age = this.props.age;
 		var id = this.props.id;
 		var removeFromList = this.props.removeFromList;
 

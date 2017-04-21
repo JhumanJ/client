@@ -270,9 +270,30 @@ var Calendar = React.createClass({
         });
     },
 
+    getPatients: function(patients, meeting, specialty, year, month, day){
+        var events = this.state.events;
+        for(var i = 0; i < events.length; i++){
+            if(events[i].year === year && events[i].month === month && events[i].day === day){
+                for(var j = 0; j < events[i].meeting.length; j++){
+                    if(_.isEqual(meeting2,events[i].meeting[j])){
+                        for(var k = 0; k < events[i].meeting[j]["specialities"].length; k++){
+                            if(events[i].meeting[j]["specialities"][k]["name"] === specialty){
+                                events[i].meeting[j]["specialities"][k]["patients"] = patients;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        this.setState({
+            events: events
+        });
+    },
+
     addPatients: function(patient, meeting2, specialty2, year, month, day){
         var events = this.state.events;
         console.log(events);
+        var url = "WHATEVER";
                         //map through meeting
                     //map through specialty
         for(var i = 0; i < events.length; i++){
@@ -283,10 +304,22 @@ var Calendar = React.createClass({
                             if(events[i].meeting[j]["specialities"][k]["name"] === specialty2){
                                 if(events[i].meeting[j]["specialities"][k].hasOwnProperty("patients")){
                                     events[i].meeting[j]["specialities"][k]["patients"].push(patient);
+                                    /*axios.post(url, {
+                                        "patient": patient,
+                                        "meeting_occurence_id": meeting2["meeting_occurence_id"],
+                                        "speciality_id": events[i].meeting[j]["specialities"][k]["speciality_id"]
+
+                                        WHATEVER necessary data,
+                                    })*/
                                 }
                                 else{
                                     events[i].meeting[j]["specialities"][k]["patients"] = [];
                                     events[i].meeting[j]["specialities"][k]["patients"].push(patient);
+                                    /*axios.post(url, {
+                                        patient: patient,
+                                        WHATEVER necessary data,
+                                        meetingID: meeting id something
+                                    })*/
                                 }
                             }
                         }
@@ -312,7 +345,13 @@ var Calendar = React.createClass({
                     if(_.isEqual(meeting2,events[i].meeting[j])){
                         for(var k = 0; k < events[i].meeting[j]["specialities"].length; k++){
                             if(events[i].meeting[j]["specialities"][k]["name"] === specialty2){
+                                var patient = events[i].meeting[j]["specialities"][k]["patients"][index];
                                 events[i].meeting[j]["specialities"][k]["patients"].splice(index,1);
+                                /*axios.post(url, {
+                                    patient: patient,
+                                    WHATEVER necessary data,
+                                })*/
+
                             }
                         }
                     }
