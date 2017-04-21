@@ -18,7 +18,6 @@ var Scheduler = React.createClass({
     };
   },
 
-
   componentWillMount: function(){
     var that = this;
     var url = "http://peachteam35.uksouth.cloudapp.azure.com:8080/api/referrals/waiting";
@@ -55,6 +54,7 @@ var Scheduler = React.createClass({
         })
       }
     })
+
   },
 
   removeFromList: function(index){
