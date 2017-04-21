@@ -48,20 +48,22 @@ class CreateNew extends React.Component {
 
   handleSubmit (e) {
     e.preventDefault()
+    const {openEHRId} = this.props
 
-    axios.post(`https://ehrscape.code4health.org/rest/v1/composition?ehrId=64effb89-9b52-4614-8cad-b11a4dad0e5a&templateId=OpenCancer+Urology+MDT+Referral+Form.v0&committerName=uclpeach&format=FLAT`, {...data, ...this.state}, {
+    axios.post(`https://ehrscape.code4health.org/rest/v1/composition?ehrId=${openEHRId}&templateId=OpenCancer+Urology+MDT+Referral+Form.v0&committerName=uclpeach&format=FLAT`, {...data, ...this.state}, {
       headers: {
         Authorization: 'Basic dWNscGVhY2hfYzRoOlFXeFBwYnl3',
         'EHr-Session-disabled': this.props.openEHRSessionId,
         'Content-Type': 'application/json'
       }
     })
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
-
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
   }
 
   render () {
+    const {openEHRId} = this.props
+
     return (
       <form onSubmit={this.handleSubmit}>
 
@@ -182,10 +184,10 @@ class CreateNew extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const {openEHRSessionId} = state.data.user
-  return {openEHRSessionId}
-}
+const mapStateToProps = (state) => ({
+  openEHRSessionId: state.data.user.openEHRSessionId,
+  openEHRId: state.data.referral.openEHRId,
+})
 
 const styles = {
     header: css({

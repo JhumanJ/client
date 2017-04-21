@@ -8,23 +8,23 @@ export const GET_OPEN_EHR_ID_FAILURE = 'GET_OPEN_EHR_ID_FAILURE'
 
 // action creators
 const getOpenEHRIdRequest = () => ({type: GET_OPEN_EHR_ID_REQUEST})
-const getOpenEHRIdSuccess = (request) => ({type: GET_OPEN_EHR_ID_REQUEST, request})
-const getOpenEHRIdFailure = (error) => ({type: GET_OPEN_EHR_ID_REQUEST, error})
+const getOpenEHRIdSuccess = (request) => ({type: GET_OPEN_EHR_ID_SUCCESS, request})
+const getOpenEHRIdFailure = (error) => ({type: GET_OPEN_EHR_ID_FAILURE, error})
 
 // actions api
 export const selectPatient = (patient) => ({type: SELECT_PATIENT, patient})
 export const getOpenEHRId = (patientId, openEHRSessionId) => (dispatch) => {
     console.log('openEHRSessionId', openEHRSessionId)
     console.log('pID', patientId)
+
     dispatch(getOpenEHRIdRequest())
-    fetch(`https://ehrscape.code4health.org/rest/v1/ehr/?subjectId=${patientId}&subjectNamespace=uk.nhs.nhs_number`, {
-        method: 'GET',
+    axios.get(`https://ehrscape.code4health.org/rest/v1/ehr/?subjectId=${patientId}&subjectNamespace=uk.nhs.nhs_number`, {
         headers: {
             Authorization: 'Basic dWNscGVhY2hfYzRoOlFXeFBwYnl3',
             'EHr-Session-disabled': openEHRSessionId,
             'Content-Type': 'application/json',
         }
     })
-        .then(res => {console.log('res', res);return getOpenEHRIdSuccess(res)})
-        .catch(err => getOpenEHRIdFailure(err))
+        .then(res => {console.log('res:',res);return dispatch(getOpenEHRIdSuccess(res))})
+        .catch(err => dispatch(getOpenEHRIdFailure(err)))
 }
