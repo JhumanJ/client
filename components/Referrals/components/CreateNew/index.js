@@ -83,7 +83,7 @@ class CreateNew extends React.Component {
                 <Modal.Title>Create a new Patient</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <NewPatient/>
+                <NewPatient openEHRSessionId={this.props.openEHRSessionId}/>
               </Modal.Body>
               <Modal.Footer>
                 <Button onClick={this.close}>Cancel</Button>
