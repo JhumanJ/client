@@ -60,6 +60,9 @@ class CreateNew extends React.Component {
       .then(res => console.log(res))
       .then(() => storeReferral(userId, openEHRId))
       .catch(err => console.log(err))
+
+      let myColor = { background: '#2e3f4f', text: "#FFFFFF" };
+      notify.show('Patient referred!', "custom", 3000, myColor);
   }
 
   render () {
