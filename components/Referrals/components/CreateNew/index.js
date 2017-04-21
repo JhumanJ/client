@@ -61,7 +61,6 @@ class CreateNew extends React.Component {
   }
 
   render () {
-
     return (
       <form onSubmit={this.handleSubmit}>
 
@@ -70,7 +69,6 @@ class CreateNew extends React.Component {
         </div>
 
         <Col xs={12} smOffset={1} sm={10}>
-
 
           <h2>Select Patient</h2>
 
