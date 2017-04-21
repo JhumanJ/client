@@ -44,6 +44,21 @@ export default (state = init, action) => {
                 jobLoading: false,
                 error: action.error,
             }
+        case a.CREATE_JOB_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case a.CREATE_JOB_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+            }
+        case a.CREATE_JOB_FAILURE:
+            return {
+                ...state,
+                loading: false,
+            }
         default:
             return state
     }
