@@ -14,8 +14,8 @@ const getOpenEHRIdRequest = () => ({type: GET_OPEN_EHR_ID_REQUEST})
 const getOpenEHRIdSuccess = (request) => ({type: GET_OPEN_EHR_ID_SUCCESS, request})
 const getOpenEHRIdFailure = (error) => ({type: GET_OPEN_EHR_ID_FAILURE, error})
 const storeReferralRequest = () => ({type: STORE_REFERRAL_REQUEST})
-const storeReferralSuccess = (response) => ({type: STORE_REFERRAL_REQUEST, response})
-const storeReferralFailure = (error) => ({type: STORE_REFERRAL_REQUEST, error})
+const storeReferralSuccess = (response) => ({type: STORE_REFERRAL_SUCCESS, response})
+const storeReferralFailure = (error) => ({type: STORE_REFERRAL_FAILURE, error})
 
 // actions api
 export const selectPatient = (patient) => ({type: SELECT_PATIENT, patient})

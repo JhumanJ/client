@@ -2920,6 +2920,10 @@ oauth-sign@~0.8.1:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.8.2.tgz#46a6ab7f0aead8deae9ec0565780b7d4efeb9d43"
 
+object-assign@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-3.0.0.tgz#9bedd5ca0897949bca47e7ff408062d549f587f2"
+
 object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
@@ -3325,7 +3329,7 @@ react-dnd@^2.3.0:
     invariant "^2.1.0"
     lodash "^4.2.0"
 
-react-dom@^15.5.4:
+"react-dom@^0.14.7 || ^15.0.0", react-dom@^15.5.4:
   version "15.5.4"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.5.4.tgz#ba0c28786fd52ed7e4f2135fe0288d462aef93da"
   dependencies:
@@ -3348,6 +3352,14 @@ react-hot-loader@3.0.0-beta.6:
 react-input-autosize@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-input-autosize/-/react-input-autosize-1.1.0.tgz#3fe1ac832387d8abab85f6051ceab1c9e5570853"
+
+react-notify-toast@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/react-notify-toast/-/react-notify-toast-0.1.5.tgz#a914e54c277c19fd73e73d2209e3d9f8f2aaafee"
+  dependencies:
+    object-assign "^3.0.0"
+    react "^0.14.7 || ^15.0.0"
+    react-dom "^0.14.7 || ^15.0.0"
 
 react-overlays@^0.6.12:
   version "0.6.12"
@@ -3389,7 +3401,7 @@ react-select@^1.0.0-rc.3:
     classnames "^2.2.4"
     react-input-autosize "^1.1.0"
 
-react@^15.5.4:
+"react@^0.14.7 || ^15.0.0", react@^15.5.4:
   version "15.5.4"
   resolved "https://registry.yarnpkg.com/react/-/react-15.5.4.tgz#fa83eb01506ab237cdc1c8c3b1cea8de012bf047"
   dependencies:
