@@ -312,7 +312,13 @@ var Calendar = React.createClass({
                                 for(var k = 0; k < events[l].meeting[j]["specialities"].length; k++){
                                     if(events[l].meeting[j]["specialities"][k]["speciality_id"] == specialityID){
                                         if(events[l].meeting[j]["specialities"][k].hasOwnProperty("patients")){
-                                            if(!events[l].meeting[j]["specialities"][k]["patients"].isArray(patient)){
+                                            var alreadyExists = false;
+                                            for(var m = 0; m < events[l].meeting[j]["specialities"][k]["patients"].length; m++){
+                                                if(events[l].meeting[j]["specialities"][k]["patients"][m]["firstNames"] == patient["firstNames"] && events[l].meeting[j]["specialities"][k]["patients"][m]["lastNames"] == patient["lastNames"] && events[l].meeting[j]["specialities"][k]["patients"][m]["gender"] == patient["gender"] && events[l].meeting[j]["specialities"][k]["patients"][m]["dateOfBirth"] == patient["dateOfBirth"]){
+                                                    alreadyExists = true;
+                                                }
+                                            }
+                                            if(!alreadyExists){
                                                 events[l].meeting[j]["specialities"][k]["patients"].push(patient);
                                             } 
                                         }
@@ -373,8 +379,6 @@ var Calendar = React.createClass({
                                     console.log(putURL + patient["referral_id"] );
                                     axios.put(putURL + patient["referral_id"] , {
                                             "Referral":{
-                                                "referred_by_id": patient["referred_by_id"],
-                                                "ehrID": patient["ehrID"],
                                                 "status": 1
                                             }
                                     }, config)
@@ -394,8 +398,6 @@ var Calendar = React.createClass({
                                     },config);
                                     axios.put(putURL + patient["referral_id"] , {
                                         "Referral":{
-                                            "referred_by_id": patient["referred_by_id"],
-                                            "ehrID": patient["ehrID"],
                                             "status": 1
                                         }
                                     }, config)

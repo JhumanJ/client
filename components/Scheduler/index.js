@@ -60,9 +60,19 @@ var Scheduler = React.createClass({
   },
 
   removeFromList: function(index){
+    const config = {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    };
     var array = this.state.patients;
     var patient = array[index];
-    
+    const putURL ="http://peachteam35.uksouth.cloudapp.azure.com:8080/api/referrals/"
+    axios.put(putURL + patient["referral_id"] , {
+        "Referral":{
+        "status": -1
+      }
+    }, config)
     array.splice(index,1);
     this.setState({
       patients: array
