@@ -2,7 +2,7 @@ import Select from 'react-select'
 import Head from 'next/head'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import {selectPatient, getOpenEHRId} from '../../../../data/referral/actions'
+import {selectPatient, getOpenEHRId} from '../../../../../../data/referral/actions'
 
 const mapStateToProps = state => ({
     openEHRSessionId: state.data.user.openEHRSessionId,

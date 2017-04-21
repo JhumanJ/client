@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import axios from 'axios'
 import {css} from 'glamor'
 import NewPatient from './components/NewPatient'
+import SelectPatient from './components/SelectPatient'
 
 
 var data = require('./data.json')
@@ -72,16 +73,25 @@ class CreateNew extends React.Component {
 
           <h2>Select Patient</h2>
 
-          <Button bsStyle="primary" onClick={this.open}>
-                <i className='fa fa-plus' aria-hidden='true' /> Add new patient
-          </Button>
+
+          <div className="row">
+              <Col xs={8} >
+                <SelectPatient/>
+              </Col>
+
+              <Col xs={4} >
+                  <Button bsStyle="primary" onClick={this.open}>
+                        <i className='fa fa-plus' aria-hidden='true' /> Add new patient
+                  </Button>
+              </Col>
+         </div>
 
           <Modal show={this.state.showModal} onHide={this.close}>
               <Modal.Header closeButton>
                 <Modal.Title>Create a new Patient</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <NewPatient openEHRSessionId={this.props.openEHRSessionId}/>
+                <NewPatient close={this.close} openEHRSessionId={this.props.openEHRSessionId}/>
               </Modal.Body>
               <Modal.Footer>
                 <Button onClick={this.close}>Cancel</Button>

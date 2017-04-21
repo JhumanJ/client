@@ -64,9 +64,7 @@ class NewPatient extends React.Component {
           .then(function(res){
              var subjectID = res.data.meta.href.substring(res.data.meta.href.lastIndexOf('/')+1);
              var url = 'https://ehrscape.code4health.org/rest/v1/ehr?subjectId='+subjectID+'&subjectNamespace=uk.nhs.nhs_number&commiterName=uclpeach';
-
-             console.log('url',url);
-             axios.post(url, {
+             axios.post(url,{}, {
                headers: {
                  Authorization: 'Basic dWNscGVhY2hfYzRoOlFXeFBwYnl3',
                  'EHr-Session-disabled': openEHRSessionId,
@@ -75,13 +73,12 @@ class NewPatient extends React.Component {
              })
              .then(function(response){
                  console.log('EHR created');
-                 console.log(response);
              })
              .catch(err => console.log("Err in 2nd request"+err))
           })
           .catch(err => console.log("Err in 1st request"+err))
 
-          console.log('subjectId',subjectId);
+          this.props.close();
 
     }
 
