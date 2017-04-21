@@ -6,6 +6,7 @@ import {css} from 'glamor'
 import NewPatient from './components/NewPatient'
 import SelectPatient from './components/SelectPatient'
 import {storeReferral} from '../../../../data/referral/actions'
+import Notifications, {notify} from 'react-notify-toast'
 
 var data = require('./data.json')
 
@@ -13,17 +14,19 @@ class CreateNew extends React.Component {
   constructor (props) {
     super(props)
     this.initialState = {
-      'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/mdt_meeting': '',
-      'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/specific_questions_for_mdt': '',
-      'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/reason_for_referral': '',
-      'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/clinical_details': '',
-      'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/mdt_review_priority': '',
-      'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/specific_date_for_mdt_review': '',
-      'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/cancer_mdt_referral_details:0/mdt_schedule|code': '',
-      'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/cancer_mdt_referral_details:0/reviews_required:0|code': '',
-      'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/cancer_mdt_referral_details:0/special_mdt_office_instructions': '',
-      'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/cancer_mdt_referral_details:0/date_symptoms_first_noticed': '',
-      'mdt_referral/general/cancer_mdt_-_urology_referral/individual_professional_demographics_uk:0/person_name/requested_by': '',
+      data: {
+        'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/mdt_meeting': '',
+        'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/specific_questions_for_mdt': '',
+        'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/reason_for_referral': '',
+        'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/clinical_details': '',
+        'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/mdt_review_priority': '',
+        'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/specific_date_for_mdt_review': '',
+        'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/cancer_mdt_referral_details:0/mdt_schedule|code': '',
+        'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/cancer_mdt_referral_details:0/reviews_required:0|code': '',
+        'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/cancer_mdt_referral_details:0/special_mdt_office_instructions': '',
+        'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/cancer_mdt_referral_details:0/date_symptoms_first_noticed': '',
+        'mdt_referral/general/cancer_mdt_-_urology_referral/individual_professional_demographics_uk:0/person_name/requested_by': '',
+      },
       showModal: false
     }
     this.state = this.initialState
@@ -43,14 +46,16 @@ class CreateNew extends React.Component {
   }
 
   handleChange (e) {
-    this.setState({[e.target.name]: e.target.value})
+    var data = this.state.data;
+    data[e.target.name] = e.target.value;
+    this.setState({ data });
   }
 
   handleSubmit (e) {
     e.preventDefault()
     const {userId, openEHRId, storeReferral} = this.props
 
-    axios.post(`https://ehrscape.code4health.org/rest/v1/composition?ehrId=${openEHRId}&templateId=OpenCancer+Urology+MDT+Referral+Form.v0&committerName=uclpeach&format=FLAT`, {...data, ...this.state}, {
+    axios.post(`https://ehrscape.code4health.org/rest/v1/composition?ehrId=${openEHRId}&templateId=OpenCancer+Urology+MDT+Referral+Form.v0&committerName=uclpeach&format=FLAT`, {...data, ...this.state.data}, {
       headers: {
         Authorization: 'Basic dWNscGVhY2hfYzRoOlFXeFBwYnl3',
         'EHr-Session-disabled': this.props.openEHRSessionId,

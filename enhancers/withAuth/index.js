@@ -7,7 +7,7 @@ export default (store) => (
         withRedux(store)(class extends React.Component {
             static async getInitialProps({store}) {
                 const isAuthenticated = !!store.getState().data.user.role
-                return {isAuthenticated: true}
+                return {isAuthenticated}
             }
 
             componentDidMount() {

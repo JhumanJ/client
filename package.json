@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "axios": "^0.16.1",
-    "babel-plugin-css-modules-transform": "^1.2.7",
     "glamor": "^2.20.24",
     "lodash": "^4.17.4",
     "lodash.isequal": "^4.5.0",
@@ -21,7 +20,9 @@
     "nprogress": "^0.2.0",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
+    "react-addons-shallow-compare": "^15.5.2",
     "react-bootstrap": "^0.30.8",
+    "react-dates": "^10.1.1",
     "react-dnd": "^2.3.0",
     "react-dnd-html5-backend": "^2.3.0",
     "react-dom": "^15.5.4",
