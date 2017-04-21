@@ -52,8 +52,10 @@ var PatientList = React.createClass({
 		if(this.state.patients.length === 0){
 			return (
 				<div>
-					<h3>{this.props.name}</h3>
-					<h3> - </h3>
+					<Panel className={styles.peach_panel} collapsible defaultExpanded header="Patient list">
+						No patients to assign.
+						<br/>
+					</Panel>
 
 				<Modal
 				      show={this.state.deleteModalIsOpen}

@@ -79,13 +79,16 @@ var Grid = React.createClass({
 		});
 	},
 
-	toggleModal2: function(meeting){
+	toggleModal2: function(meeting, year, month, day){
 
 		//POST IS DONE HERE, MIGHT NEED MORETHAN ONE PARAMETER
+		this.props.getPatients(meeting, year, month, day);
 		this.setState({
 			specialtyModalIsOpen: true,
 			interestedMeeting: meeting
 		});
+
+		
 		/*if(this.state.getPatients){
 			this.setState({
 				specialtyModalIsOpen: true,
@@ -168,7 +171,7 @@ var Grid = React.createClass({
 			return (
 				<div>
 					<div className={styles.btn_container}>
-						<button className={my_className} onClick={()=>this.toggleModal2(meet)}>{meet["title"].length<10?meet["title"]:meet["title"].substring(0,10)+"..."}</button>
+						<button className={my_className} onClick={()=>this.toggleModal2(meet, this.state.year, this.state.month, this.state.day)}>{meet["title"].length<10?meet["title"]:meet["title"].substring(0,10)+"..."}</button>
 					</div>
 					<Modal
 						show={this.state.specialtyModalIsOpen && this.state.interestedMeeting === meet}
