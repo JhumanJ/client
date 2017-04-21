@@ -25,6 +25,7 @@ export default class MyDocument extends Document {
           <link href='https://fonts.googleapis.com/css?family=Lato|Lato:300|Open+Sans' rel='stylesheet' />
           <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet'crossorigin='anonymous' />
           <link rel='stylesheet' href='static/css/styles.css' />
+          <link rel='stylesheet' href='static/css/react-dates/datepicker.css' />
           <title>PEACH Cancer</title>
           <style dangerouslySetInnerHTML={{ __html: this.props.css }} />
 

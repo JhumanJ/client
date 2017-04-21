@@ -1,8 +1,9 @@
 import {style} from 'glamor'
 
-export default ({title, comment, onDelete, loading, ...props}) => (
+export default ({title, comment, dueDate, onDelete, loading, ...props}) => (
     <div className={`${styles.container} ${loading && styles.loading}`}>
-        <h4>{title}</h4>
+        <h4 className={styles.title}>{title}</h4>
+        <p className={styles.dueDate}>{dueDate}</p>
         <p className={styles.comment}>{comment}</p>
         <button
             className={styles.button}
@@ -32,8 +33,18 @@ const styles = {
         opacity: .6,
     }),
 
+    title: style({
+        margin: '0 0 5px',
+    }),
+
     comment: style({
         margin: 0,
+    }),
+
+    dueDate: style({
+        fontSize: '11px',
+        opacity: .6,
+        margin: '0 0 10px',
     }),
 
     button: style({

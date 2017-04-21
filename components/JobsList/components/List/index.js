@@ -7,6 +7,7 @@ export default ({jobs, onDelete, loading, jobLoading, ...props}) => (
             <Job
                 key={job.job_id}
                 title={job.title}
+                dueDate={job.due_date}
                 loading={loading || jobLoading === job.job_id}
                 onDelete={() => onDelete(job.job_id)}
                 comment={job.comment} />
