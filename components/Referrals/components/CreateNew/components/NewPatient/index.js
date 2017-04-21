@@ -1,7 +1,7 @@
 import React from 'react'
 import {Panel, FormGroup, InputGroup, FormControl, Button, Col, ControlLabel} from 'react-bootstrap'
 import {css} from 'glamor'
-
+import axios from 'axios'
 
 class NewPatient extends React.Component {
 
@@ -52,20 +52,36 @@ class NewPatient extends React.Component {
 
     handleSubmit (e) {
       e.preventDefault()
+      const openEHRSessionId = this.props.openEHRSessionId;
 
-      axios.post(`https://ehrscape.code4health.org/rest/v1/demographics/party`, {...data, ...this.state}, {
+      axios.post(`https://ehrscape.code4health.org/rest/v1/demographics/party`, { ...this.state}, {
         headers: {
           Authorization: 'Basic dWNscGVhY2hfYzRoOlFXeFBwYnl3',
-          'EHr-Session-disabled': `sessionId ${this.props.openEHRSessionId}`,
+          'EHr-Session-disabled': openEHRSessionId,
           'Content-Type': 'application/json'
         }
       })
           .then(function(res){
+             var subjectID = res.data.meta.href.substring(res.data.meta.href.lastIndexOf('/')+1);
+             var url = 'https://ehrscape.code4health.org/rest/v1/ehr?subjectId='+subjectID+'&subjectNamespace=uk.nhs.nhs_number&commiterName=uclpeach';
 
+             console.log('url',url);
+             axios.post(url, {
+               headers: {
+                 Authorization: 'Basic dWNscGVhY2hfYzRoOlFXeFBwYnl3',
+                 'EHr-Session-disabled': openEHRSessionId,
+                 'Content-Type': 'application/json'
+                }
+             })
+             .then(function(response){
+                 console.log('EHR created');
+                 console.log(response);
+             })
+             .catch(err => console.log("Err in 2nd request"+err))
           })
-          .catch(err => console.log(err))
-      //do the post
-      console.log(this.state);
+          .catch(err => console.log("Err in 1st request"+err))
+
+          console.log('subjectId',subjectId);
 
     }
 

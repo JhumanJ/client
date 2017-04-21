@@ -51,7 +51,7 @@ class CreateNew extends React.Component {
     axios.post(`https://ehrscape.code4health.org/rest/v1/composition?ehrId=64effb89-9b52-4614-8cad-b11a4dad0e5a&templateId=OpenCancer+Urology+MDT+Referral+Form.v0&committerName=uclpeach&format=FLAT`, {...data, ...this.state}, {
       headers: {
         Authorization: 'Basic dWNscGVhY2hfYzRoOlFXeFBwYnl3',
-        'EHr-Session-disabled': `sessionId ${this.props.openEHRSessionId}`,
+        'EHr-Session-disabled': this.props.openEHRSessionId,
         'Content-Type': 'application/json'
       }
     })
