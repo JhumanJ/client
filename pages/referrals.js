@@ -12,7 +12,7 @@ import Tutorial from '../components/Referrals/components/Tutorial'
 class Referral extends React.Component {
   render() {
     return (
-      <Layout>
+      <Layout activePage={this.props.pathname}>
         <Tabs id='controlled-tab-example'>
           <Tab eventKey={1} title={<span><i className='fa fa-plus' aria-hidden='true' /> New Referral </span>}>
             <div className={styles.tabcontainer}>
