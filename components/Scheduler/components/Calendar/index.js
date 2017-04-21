@@ -82,6 +82,8 @@ var Calendar = React.createClass({
             that.setState({
                 events : events
             })
+        }).catch(function(error){
+            console.log(error);
         })
     },
     componentDidMount: function () {
@@ -180,6 +182,8 @@ var Calendar = React.createClass({
             that.setState({
                 events : events
             })
+        }).catch(function(error){
+            console.log(error);
         })
         Object.assign(state, this.calc.call(null, state.year, state.month));
         this.setState(state);
@@ -251,6 +255,8 @@ var Calendar = React.createClass({
             that.setState({
                 events : events
             })
+        }).catch(function(error){
+            console.log(error);
         })
         Object.assign(state, this.calc.call(null, state.year, state.month));
         this.setState(state);
@@ -293,7 +299,13 @@ var Calendar = React.createClass({
     addPatients: function(patient, meeting2, specialty2, year, month, day){
         var events = this.state.events;
         console.log(events);
-        var url = "WHATEVER";
+        const openEHRSessionId = this.props.openEHRSessionId;
+        const baseurl = "http://peachteam35.uksouth.cloudapp.azure.com:8080/api/patient_assignments/";
+        const config = {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        };
                         //map through meeting
                     //map through specialty
         for(var i = 0; i < events.length; i++){
@@ -304,13 +316,14 @@ var Calendar = React.createClass({
                             if(events[i].meeting[j]["specialities"][k]["name"] === specialty2){
                                 if(events[i].meeting[j]["specialities"][k].hasOwnProperty("patients")){
                                     events[i].meeting[j]["specialities"][k]["patients"].push(patient);
-                                    /*axios.post(url, {
-                                        "patient": patient["referral_id"],
-                                        "meeting_occurence_id": meeting2["meeting_occurence_id"],
-                                        "speciality_id": events[i].meeting[j]["specialities"][k]["speciality_id"]
-
-                                        WHATEVER necessary data,
-                                    })
+                                    axios.post(baseurl, {
+                                        "PatientAssigment": {
+                                            "ehrID": patient["ehrID"],
+                                            "speciality_id": events[i].meeting[j]["specialities"][k]["speciality_id"],
+                                            "meeting_occurence_id":meeting2["meeting_occurence_id"]
+                                        }
+                                    },config)
+                                    /*
                                     axios.put(url, data:{
                                         "Referral":{
                                             "referred_by_id": patient["referred_by_id"],
@@ -323,6 +336,13 @@ var Calendar = React.createClass({
                                 else{
                                     events[i].meeting[j]["specialities"][k]["patients"] = [];
                                     events[i].meeting[j]["specialities"][k]["patients"].push(patient);
+                                    axios.post(baseurl, {
+                                        "PatientAssigment": {
+                                            "ehrID": patient["ehrID"],
+                                            "speciality_id": events[i].meeting[j]["specialities"][k]["speciality_id"],
+                                            "meeting_occurence_id":meeting2["meeting_occurence_id"]
+                                        }
+                                    },config)
                                     /*axios.post(url, {
                                         patient: patient,
                                         WHATEVER necessary data,

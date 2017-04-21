@@ -36,23 +36,25 @@ var Scheduler = React.createClass({
         var referralID = ehrDetails[i]["referral_id"];
         var referredByID = ehrDetails[i]["referred_by_id"];
         var ehrURL = 'https://ehrscape.code4health.org/rest/v1/demographics/ehr/' + ehrID + '/party';
-        axios.get(ehrURL, {
-          headers: {
-            Authorization: 'Basic dWNscGVhY2hfYzRoOlFXeFBwYnl3',
-            'EHr-Session-disabled': openEHRSessionId
-          }
-        }).then(function(response){
+        axios.get(ehrURL, config).then(function(response){
           var patient = response.data.party;
           patient["referral_id"] = referralID;
           patient["ehrID"] = ehrID;
           patient["referred_by_id"] = referredByID;
           patients.push(patient);
           console.log(patient);
+          console.log("ehrID");
+          console.log(ehrID);
+
           that.setState({
             patients: patients
           });
+        }).catch(function(error){
+          console.log(error);
         })
       }
+    }).catch(function(error){
+      console.log(error);
     })
 
   },
