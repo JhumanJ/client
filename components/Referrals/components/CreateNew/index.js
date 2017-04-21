@@ -56,7 +56,15 @@ class CreateNew extends React.Component {
         </div>
 
         <Col xs={12} smOffset={1} sm={10}>
-          <h2>Request</h2>
+
+
+          <h2>Select Patient</h2>
+
+        //   insert react-select here
+
+        //   modal btn to add
+
+          <h2 className={styles.marg30Top}>Request</h2>
 
           <FormGroup controlId='mdt_meeting'>
             <ControlLabel>* MDT meeting</ControlLabel>
