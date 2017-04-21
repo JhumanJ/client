@@ -380,16 +380,18 @@ var Calendar = React.createClass({
                                             "referral_id": patient["referral_id"]
 
                                         }
-                                    },config)
-                                    axios.put(putURL + patient["referral_id"] , {
+                                    },config).then(function(response){
+                                        axios.put(putURL + patient["referral_id"] , {
                                             "Referral":{
                                                 "status": 1
                                             }
-                                    }, config).then(function(response){
-                                        that.setState({
-                                            events: events
+                                        }, config).then(function(response){
+                                            that.setState({
+                                                events: events
+                                            })
                                         })
                                     })
+                                    
                                                        
 
                                 }
@@ -403,16 +405,18 @@ var Calendar = React.createClass({
                                             "meeting_occurence_id":meeting2["meeting_occurence_id"],
                                             "referral_id": patient["referral_id"]
                                         }
-                                    },config);
-                                    axios.put(putURL + patient["referral_id"] , {
-                                        "Referral":{
-                                            "status": 1
-                                        }
-                                    }, config).then(function(response){
-                                        that.setState({
-                                            events: events
+                                    },config).then(function(response){
+                                        axios.put(putURL + patient["referral_id"] , {
+                                            "Referral":{
+                                                "status": 1
+                                            }
+                                        }, config).then(function(response){
+                                            that.setState({
+                                                events: events
+                                            })
                                         })
                                     })
+                                    
 
                                 }
                             }
@@ -447,12 +451,13 @@ var Calendar = React.createClass({
                                 var patient = events[i].meeting[j]["specialities"][k]["patients"][index];
                                 console.log(patient);
                                 console.log("PUTURL2", putURL + patient["referral_id"] )
-                                axios.delete(deleteURL + patient["patient_assignment_id"])
-                                axios.put(putURL + patient["referral_id"] , {
-                                    "Referral":{
-                                        "status": 0
-                                    }
-                                }, config)
+                                axios.delete(deleteURL + patient["patient_assignment_id"]).then(function(response){
+                                    axios.put(putURL + patient["referral_id"] , {
+                                        "Referral":{
+                                            "status": 0
+                                        }
+                                    }, config)
+                                })
                                 events[i].meeting[j]["specialities"][k]["patients"].splice(index,1);
                             }
                         }
