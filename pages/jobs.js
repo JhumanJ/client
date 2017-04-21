@@ -1,7 +1,7 @@
 import React from 'react'
 import Layout from '../components/Layout'
 import {initStore} from '../store'
-import WithAuth from '../components/WithAuth'
+import withAuth from '../enhancers/withAuth'
 import JobsList from '../components/JobsList'
 
 class Jobs extends React.Component {
@@ -14,4 +14,4 @@ class Jobs extends React.Component {
   }
 }
 
-export default WithAuth(initStore)(Jobs)
+export default withAuth(initStore)(Jobs)
