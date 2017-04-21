@@ -1,7 +1,7 @@
 import React from 'react'
 import Layout from '../components/Layout'
 import {initStore} from '../store'
-import WithAuth from '../components/WithAuth'
+import withAuth from '../enhancers/withAuth'
 import {Panel, FormGroup, InputGroup, FormControl, Button, Col} from 'react-bootstrap'
 import {PatientList} from '../components/CasePreparation'
 
@@ -47,4 +47,4 @@ class CasePreparation extends React.Component {
   }
 }
 
-export default WithAuth(initStore)(CasePreparation)
+export default withAuth(initStore)(CasePreparation)

@@ -1,5 +1,5 @@
 import React from 'react'
-import WithAuth from '../components/WithAuth'
+import withAuth from '../enhancers/withAuth'
 import {initStore} from '../store'
 import Layout from '../components/Layout'
 import Scheduler from '../components/Scheduler'
@@ -16,4 +16,4 @@ class Triage extends React.Component {
     }
 }
 
-export default WithAuth(initStore)(Triage)
+export default withAuth(initStore)(Triage)

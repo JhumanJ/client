@@ -1,5 +1,5 @@
 import React from 'react'
-import WithAuth from '../components/WithAuth'
+import withAuth from '../enhancers/withAuth'
 import {initStore} from '../store'
 import Layout from '../components/Layout'
 import {Tabs, Tab, Col} from 'react-bootstrap'
@@ -54,4 +54,4 @@ const styles = {
     })
 }
 
-export default WithAuth(initStore)(Referral)
+export default withAuth(initStore)(Referral)
