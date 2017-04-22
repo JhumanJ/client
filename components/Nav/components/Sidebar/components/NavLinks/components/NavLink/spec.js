@@ -9,4 +9,10 @@ describe('NavLink Component', () => {
         const navLink = shallow(<NavLink>{testString}</NavLink>)
         expect(navLink.find('a').text()).toEqual(testString)
     })
+
+    it('NavLink has different classes when active', () => {
+        const navLink = shallow(<NavLink>Foo</NavLink>)
+        const navLinkActive = shallow(<NavLink active>Foo</NavLink>)
+        expect(navLink.find('a').prop('className')).not.toEqual(navLinkActive.find('a').prop('className'))
+    })
 })
