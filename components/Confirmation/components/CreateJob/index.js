@@ -1,9 +1,9 @@
 import {connect} from 'react-redux'
 import {notify} from 'react-notify-toast'
 import {style} from 'glamor'
-import {createJob} from '../../data/jobs/actions'
-import {Input, LongInput, Date} from '../Form'
-import Button from '../Button'
+import {createJob} from '../../../../data/jobs/actions'
+import {Input, LongInput, Date} from '../../../Form'
+import Button from '../../../Button'
 
 class CreateJob extends React.Component {
     constructor(props) {
@@ -31,6 +31,7 @@ class CreateJob extends React.Component {
         })
         this.setState(this.init)
         notify.show('Job Created', 'success')
+        this.props.close()
     }
 
     render() {

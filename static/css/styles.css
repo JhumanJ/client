@@ -33,3 +33,15 @@ p {
   color: '#232325';
   font-size: '13px';
 }
+
+.btn {
+    border: none;
+}
+
+.btn-primary {
+    background-color: #2E3F4F;
+}
+
+.btn-primary:hover {
+    background-color: #0c2944;
+}

@@ -42,7 +42,6 @@ class CreateNew extends React.Component {
 
   open() {
     this.setState({ showModal: true });
-    console.log(this.state);
   }
 
   handleChange (e) {
@@ -65,9 +64,8 @@ class CreateNew extends React.Component {
       .then(res => console.log(res))
       .then(() => storeReferral(userId, openEHRId))
       .catch(err => console.log(err))
+      notify.show('Patient referred!', 'success')
 
-      let myColor = { background: '#2e3f4f', text: "#FFFFFF" };
-      notify.show('Patient referred!', "custom", 3000, myColor);
   }
 
   render () {
