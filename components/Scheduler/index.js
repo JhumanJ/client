@@ -13,7 +13,8 @@ import axios from 'axios'
 var Scheduler = React.createClass({
   getInitialState: function () {
     return {
-      patients: []
+      patients: [],
+      hasFinishedLoading: false
     }
   },
 
@@ -55,7 +56,8 @@ var Scheduler = React.createClass({
           console.log("Pushed patient", patient)
         })
         that.setState({
-          patients: patients
+          patients: patients,
+          hasFinishedLoading: true
         })
       })
       /*for (var i = 0; i < ehrDetails.length; i++) {
@@ -117,7 +119,7 @@ var Scheduler = React.createClass({
     return (
       <div className='App'>
         <Col xs={12} sm={10} md={3} smOffset={1} mdOffset={0}>
-          <PatientList patients={this.state.patients} name='List of Patients' removeFromList={this.removeFromList} />
+          <PatientList hasFinishedLoading={this.state.hasFinishedLoading} patients={this.state.patients} name='List of Patients' removeFromList={this.removeFromList} />
         </Col>
         <Col xs={12} sm={10} md={9} smOffset={1} mdOffset={0}>
           <Calendar openEHRSessionId={this.props.openEHRSessionId} addPatient={this.addPatient} />

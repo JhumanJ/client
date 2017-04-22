@@ -12,6 +12,13 @@ var PatientList = React.createClass({
     }
   },
 
+  getDefaultProps: function () {
+    return {
+      hasFinishedLoading: false
+    }
+  },
+
+
   toggleModal: function (index) {
     this.setState({
       deleteModalIsOpen: !this.state.deleteModalIsOpen,
@@ -49,12 +56,23 @@ var PatientList = React.createClass({
         </div>
       )
     })
-    if (this.state.patients.length === 0) {
+    if(!this.props.hasFinishedLoading){
+      return (
+        <div>
+          <Panel className={styles.peach_panel+" text-center"} collapsible defaultExpanded header='Patient list'>
+            <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+            <br />
+          </Panel>
+        </div>
+      )
+    }
+    else{
+      if (this.state.patients.length === 0) {
       return (
         <div>
           <Panel className={styles.peach_panel} collapsible defaultExpanded header='Patient list'>
-						No patients to assign.
-						<br />
+            No patients to assign.
+            <br />
           </Panel>
 
           <Modal
@@ -62,11 +80,11 @@ var PatientList = React.createClass({
             onHide={this.toggleModal}
             container={this}
             aria-labelledby='contained-modal-title'
-				    >
+            >
             <Modal.Header closeButton>
               <Modal.Title id='contained-modal-title'>
-								Are you sure you want to delete the patient from the patient list?
-							</Modal.Title>
+                Are you sure you want to delete the patient from the patient list?
+              </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Button bsClass={styles.btn_marg + ' btn btn-primary'} onClick={() => this.toggleModal()}>No</Button>
@@ -76,13 +94,13 @@ var PatientList = React.createClass({
 
         </div>
       )
-    }		else {
+    }   else {
       return (
         <div>
 
           <Panel className={styles.peach_panel} collapsible defaultExpanded header='Patient list'>
-						Drag a patient and drop it to the calendar.
-						<br />
+            Drag a patient and drop it to the calendar.
+            <br />
             <ListGroup fill>
               {patientlisting}
             </ListGroup>
@@ -93,11 +111,11 @@ var PatientList = React.createClass({
             onHide={this.toggleModal}
             container={this}
             aria-labelledby='contained-modal-title'
-				    >
+            >
             <Modal.Header closeButton>
               <Modal.Title id='contained-modal-title'>
-								Are you sure you want to delete the patient from the patient list?
-							</Modal.Title>
+                Are you sure you want to delete the patient from the patient list?
+              </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Button className={styles.btn_marg} bsStyle='danger' onClick={() => this.deleteFromModal(this.state.currentIndex, this.state.patients[this.state.currentIndex])}>Yes</Button>
@@ -107,6 +125,8 @@ var PatientList = React.createClass({
         </div>
       )
     }
+    }
+    
   }
 })
 
