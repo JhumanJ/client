@@ -210,7 +210,7 @@ const styles = {
     width: '100%'
   }),
   marg30Top: css({
-    marginTop: '30px'
+    marginTop: '50px'
   })
 }
 
