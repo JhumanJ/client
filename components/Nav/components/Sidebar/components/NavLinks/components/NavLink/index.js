@@ -5,7 +5,7 @@ export default ({children, href, active, ...props}) => {
   return (
     <Link href={href} prefetch {...props}>
       <a
-        className={`${styles.link} ${active && styles.active}`}
+        className={`${styles.link} ${active ? styles.active : ''}`}
         children={children} />
     </Link>
   )
