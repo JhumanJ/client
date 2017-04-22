@@ -28,22 +28,22 @@ const createJobFailure = (error) => ({type: CREATE_JOB_FAILURE, error})
 
 // Actions API
 export const getJobs = () => dispatch => {
-    dispatch(getJobsRequest())
-    axios.get(JOBS_API)
+  dispatch(getJobsRequest())
+  axios.get(JOBS_API)
         .then(res => dispatch(getJobsSuccess(res)))
         .catch(err => dispatch(getJobsFailure(err)))
 }
 
 export const deleteJob = id => dispatch => {
-    dispatch(deleteJobRequest(id))
-    axios.delete(DELETE_API(id))
+  dispatch(deleteJobRequest(id))
+  axios.delete(DELETE_API(id))
         .then(() => dispatch(deleteJobSuccess(id)))
         .catch(err => dispatch(deleteJobFailure(err)))
 }
 
 export const createJob = job => dispatch => {
-    dispatch(createJobRequest())
-    axios.post(CREATE_API, {Job: job})
+  dispatch(createJobRequest())
+  axios.post(CREATE_API, {Job: job})
         .then(res => dispatch(createJobSuccess(res)))
         .catch(err => dispatch(createJobFailure(err)))
 }

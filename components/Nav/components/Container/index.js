@@ -7,7 +7,7 @@ export default (props) => (
 
 const styles = {
   container: style({
-    
+
     minHeight: '100vh'
   })
 }

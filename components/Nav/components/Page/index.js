@@ -7,6 +7,6 @@ export default (props) => (
 const styles = {
   container: style({
     padding: '25px',
-    marginLeft: '210px',
+    marginLeft: '210px'
   })
 }

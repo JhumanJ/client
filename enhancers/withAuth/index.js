@@ -4,19 +4,19 @@ import withRedux from 'next-redux-wrapper'
 
 export default (store) => (Page) => (
     withRedux(store)(class extends React.Component {
-        static async getInitialProps({store, pathname}) {
-            const isAuthenticated = !!store.getState().data.user.role
-            return {isAuthenticated: true, pathname}
-        }
+      static async getInitialProps ({store, pathname}) {
+        const isAuthenticated = !!store.getState().data.user.role
+        return {isAuthenticated: true, pathname}
+      }
 
-        componentDidMount() {
-            if (!this.props.isAuthenticated) {
-                Router.push('/login')
-            }
+      componentDidMount () {
+        if (!this.props.isAuthenticated) {
+          Router.push('/login')
         }
+      }
 
-        render() {
-            return <Page {...this.props}/>
-        }
+      render () {
+        return <Page {...this.props} />
+      }
     })
 )

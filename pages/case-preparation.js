@@ -6,7 +6,7 @@ import {Panel, FormGroup, InputGroup, FormControl, Button, Col} from 'react-boot
 import {PatientList} from '../components/CasePreparation'
 
 class CasePreparation extends React.Component {
-  render() {
+  render () {
     const searchbar = (
       <FormGroup>
         <InputGroup>

@@ -4,7 +4,7 @@ import withAuth from '../enhancers/withAuth'
 import Layout from '../components/Layout'
 
 class LiveMDT extends React.Component {
-  render() {
+  render () {
     return (
       <Layout activePage={this.props.pathname}>
         <p>To be done by another team.</p>

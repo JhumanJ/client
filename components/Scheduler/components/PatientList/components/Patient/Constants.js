@@ -1,3 +1,3 @@
 exports.ItemTypes = {
-	PATIENT: 'patient'
-};
+  PATIENT: 'patient'
+}

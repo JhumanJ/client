@@ -7,7 +7,7 @@
     "start": "next start",
     "build": "next build",
     "postinstall": "npm run build",
-    "test": "standard --fix",
+    "test": "jest",
     "dev": "next"
   },
   "dependencies": {
@@ -34,7 +34,12 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "redux-logger": "^3.0.1",
-    "standard": "^10.0.2"
+    "babel-jest": "^19.0.0",
+    "babel-preset-es2015": "^6.24.1",
+    "enzyme": "^2.8.2",
+    "jest-cli": "^19.0.2",
+    "react-addons-test-utils": "^15.5.1",
+    "react-test-renderer": "^15.5.4",
+    "redux-logger": "^3.0.1"
   }
 }

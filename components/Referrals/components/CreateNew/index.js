@@ -25,7 +25,7 @@ class CreateNew extends React.Component {
         'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/cancer_mdt_referral_details:0/reviews_required:0|code': '',
         'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/cancer_mdt_referral_details:0/special_mdt_office_instructions': '',
         'mdt_referral/general/cancer_mdt_-_urology_referral/request:0/cancer_mdt_referral_details:0/date_symptoms_first_noticed': '',
-        'mdt_referral/general/cancer_mdt_-_urology_referral/individual_professional_demographics_uk:0/person_name/requested_by': '',
+        'mdt_referral/general/cancer_mdt_-_urology_referral/individual_professional_demographics_uk:0/person_name/requested_by': ''
       },
       showModal: false
     }
@@ -36,18 +36,18 @@ class CreateNew extends React.Component {
     this.close = this.close.bind(this)
   }
 
-  close() {
-    this.setState({ showModal: false });
+  close () {
+    this.setState({ showModal: false })
   }
 
-  open() {
-    this.setState({ showModal: true });
+  open () {
+    this.setState({ showModal: true })
   }
 
   handleChange (e) {
-    var data = this.state.data;
-    data[e.target.name] = e.target.value;
-    this.setState({ data });
+    var data = this.state.data
+    data[e.target.name] = e.target.value
+    this.setState({ data })
   }
 
   handleSubmit (e) {
@@ -64,8 +64,7 @@ class CreateNew extends React.Component {
       .then(res => console.log(res))
       .then(() => storeReferral(userId, openEHRId))
       .catch(err => console.log(err))
-      notify.show('Patient referred!', 'success')
-
+    notify.show('Patient referred!', 'success')
   }
 
   render () {
@@ -73,38 +72,36 @@ class CreateNew extends React.Component {
       <form onSubmit={this.handleSubmit}>
 
         <div className={styles.header}>
-            <img className={styles.headerImg} src="/static/img/referral/referral.jpg"/>
+          <img className={styles.headerImg} src='/static/img/referral/referral.jpg' />
         </div>
 
         <Col xs={12} smOffset={1} sm={10}>
 
           <h2>Select Patient</h2>
 
+          <div className='row'>
+            <Col xs={8} >
+              <SelectPatient />
+            </Col>
 
-          <div className="row">
-              <Col xs={8} >
-                <SelectPatient/>
-              </Col>
-
-              <Col xs={4} >
-                  <Button bsStyle="primary" onClick={this.open}>
-                        <i className='fa fa-plus' aria-hidden='true' /> Add new patient
+            <Col xs={4} >
+              <Button bsStyle='primary' onClick={this.open}>
+                <i className='fa fa-plus' aria-hidden='true' /> Add new patient
                   </Button>
-              </Col>
-         </div>
+            </Col>
+          </div>
 
           <Modal show={this.state.showModal} onHide={this.close}>
-              <Modal.Header closeButton>
-                <Modal.Title>Create a new Patient</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <NewPatient close={this.close} openEHRSessionId={this.props.openEHRSessionId}/>
-              </Modal.Body>
-              <Modal.Footer>
-                <Button onClick={this.close}>Cancel</Button>
-              </Modal.Footer>
-         </Modal>
-
+            <Modal.Header closeButton>
+              <Modal.Title>Create a new Patient</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <NewPatient close={this.close} openEHRSessionId={this.props.openEHRSessionId} />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={this.close}>Cancel</Button>
+            </Modal.Footer>
+          </Modal>
 
           <h2 className={styles.marg30Top}>Request</h2>
 
@@ -192,7 +189,7 @@ class CreateNew extends React.Component {
 const mapStateToProps = (state) => ({
   openEHRSessionId: state.data.user.openEHRSessionId,
   userId: state.data.user.id,
-  openEHRId: state.data.referral.openEHRId,
+  openEHRId: state.data.referral.openEHRId
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -200,22 +197,21 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const styles = {
-    header: css({
-        width: '100%',
-        border: '1px solid #ddd',
-        borderRadius: '3px',
-        height: '250px',
-        backgound: 'url()',
-        overflow: 'hidden',
-        marginBottom: '30px'
-    }),
-    headerImg: css({
-        width: '100%'
-    }),
-    marg30Top: css({
-        marginTop: '30px'
-    })
+  header: css({
+    width: '100%',
+    border: '1px solid #ddd',
+    borderRadius: '3px',
+    height: '250px',
+    backgound: 'url()',
+    overflow: 'hidden',
+    marginBottom: '30px'
+  }),
+  headerImg: css({
+    width: '100%'
+  }),
+  marg30Top: css({
+    marginTop: '30px'
+  })
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateNew)

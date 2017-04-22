@@ -1,7 +1,7 @@
 import {rehydrate} from 'glamor'
 import Loader from '../Loader'
 import Nav from '../Nav'
-import Notifications, {notify} from 'react-notify-toast';
+import Notifications, {notify} from 'react-notify-toast'
 
 // Adds server generated styles to glamor cache.
 // Has to run before any `style()` calls

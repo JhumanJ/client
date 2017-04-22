@@ -20,25 +20,25 @@ const storeReferralFailure = (error) => ({type: STORE_REFERRAL_FAILURE, error})
 // actions api
 export const selectPatient = (patient) => ({type: SELECT_PATIENT, patient})
 export const getOpenEHRId = (patientId, openEHRSessionId) => (dispatch) => {
-    console.log('openEHRSessionId', openEHRSessionId)
-    console.log('pID', patientId)
+  console.log('openEHRSessionId', openEHRSessionId)
+  console.log('pID', patientId)
 
-    dispatch(getOpenEHRIdRequest())
-    axios.get(`https://ehrscape.code4health.org/rest/v1/ehr/?subjectId=${patientId}&subjectNamespace=uk.nhs.nhs_number`, {
-        headers: {
-            Authorization: 'Basic dWNscGVhY2hfYzRoOlFXeFBwYnl3',
-            'EHr-Session-disabled': openEHRSessionId,
-            'Content-Type': 'application/json',
-        }
-    })
-        .then(res => {console.log('res:',res);return dispatch(getOpenEHRIdSuccess(res))})
+  dispatch(getOpenEHRIdRequest())
+  axios.get(`https://ehrscape.code4health.org/rest/v1/ehr/?subjectId=${patientId}&subjectNamespace=uk.nhs.nhs_number`, {
+    headers: {
+      Authorization: 'Basic dWNscGVhY2hfYzRoOlFXeFBwYnl3',
+      'EHr-Session-disabled': openEHRSessionId,
+      'Content-Type': 'application/json'
+    }
+  })
+        .then(res => { console.log('res:', res); return dispatch(getOpenEHRIdSuccess(res)) })
         .catch(err => dispatch(getOpenEHRIdFailure(err)))
 }
 export const storeReferral = (referred_by_id, ehrID) => dispatch => {
-    dispatch(storeReferralRequest())
-    axios.post(`http://peachteam35.uksouth.cloudapp.azure.com:8080/api/referrals/`, {
-        Referral: {referred_by_id, ehrID}
-    })
+  dispatch(storeReferralRequest())
+  axios.post(`http://peachteam35.uksouth.cloudapp.azure.com:8080/api/referrals/`, {
+    Referral: {referred_by_id, ehrID}
+  })
         .then(res => dispatch(storeReferralSuccess(res)))
         .catch(err => dispatch(storeReferralFailure(err)))
 }

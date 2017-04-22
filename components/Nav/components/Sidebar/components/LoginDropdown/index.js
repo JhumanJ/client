@@ -5,12 +5,12 @@ export default ({user, setHardcodedUser, ...props}) => {
     {
       id: 34,
       name: 'Normal User',
-      role: 'normal',
+      role: 'normal'
     },
     {
       id: 50,
       name: 'Admin User',
-      role: 'admin',
+      role: 'admin'
     }
   ]
 
@@ -21,7 +21,7 @@ export default ({user, setHardcodedUser, ...props}) => {
   return (
     <div className={styles.container} onChange={handleChange}>
       <select className={styles.name} defaultValue={user.id || -1} selected={user.id}>
-        <option className={styles.visibleOption} value={-1} children="Annonymous"/>
+        <option className={styles.visibleOption} value={-1} children='Annonymous' />
         {users.map(item => <option className={styles.visibleOption} key={item.id} children={item.name} value={item.id} />)}
       </select>
     </div>
@@ -30,10 +30,10 @@ export default ({user, setHardcodedUser, ...props}) => {
 
 const styles = {
   container: style({
-    padding: '15px 25px',
+    padding: '15px 25px'
   }),
   visibleOption: style({
-      color: 'black'
+    color: 'black'
   }),
   name: style({
     fontFamily: 'Lato, sans-serif',
@@ -41,6 +41,6 @@ const styles = {
     color: 'white',
     background: 'none',
     border: 0,
-    padding: 0,
+    padding: 0
   })
 }
