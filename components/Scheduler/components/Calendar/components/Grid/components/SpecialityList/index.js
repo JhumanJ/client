@@ -6,7 +6,8 @@ import {style} from 'glamor'
 var SpecialtyList = React.createClass({
   getDefaultProps: function () {
     return {
-      patients: []
+      patients: [],
+      hasFinishedLoading: false
     }
   },
 
@@ -17,7 +18,19 @@ var SpecialtyList = React.createClass({
   },
 
   render: function () {
-    if (this.props.patients.length === 0 || this.props.patients == undefined) {
+    if(!this.props.hasFinishedLoading){
+      return (
+        <div>
+          <h3>{this.props.specialty}</h3>
+          <ListGroup fill>
+            <ListGroupItem className="text-center"> <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i> </ListGroupItem>
+          </ListGroup>
+
+        </div>
+      )
+    }
+    else{
+      if (this.props.patients.length === 0 || this.props.patients == undefined) {
       return (
         <div>
           <h3>{this.props.specialty}</h3>
@@ -27,7 +40,7 @@ var SpecialtyList = React.createClass({
 
         </div>
       )
-    }		else			{
+    }   else      {
       var patientlisting = this.props.patients.map((patient, i) => {
         return (
           <div>
@@ -49,6 +62,8 @@ var SpecialtyList = React.createClass({
         </div>
       )
     }
+    }
+    
   }
 })
 

@@ -28,9 +28,37 @@ var Scheduler = React.createClass({
       }
     }
     var patients = this.state.patients
+    var ehrIDArray = [];
+    var referralIDArray = [];
+    var referredByIDArray = [];
+    var promises = [];
+
     axios.get(url).then(function (response) {
       var ehrDetails = response.data
-      for (var i = 0; i < ehrDetails.length; i++) {
+      ehrDetails.forEach(function(ehrdetail){
+        ehrIDArray.push(ehrdetail['ehrID']);
+        referralIDArray.push(ehrdetail['referral_id']);
+        referredByIDArray.push(ehrdetail['referred_by_id']);
+        var ehrURL = 'https://ehrscape.code4health.org/rest/v1/demographics/ehr/' + ehrdetail['ehrID'] + '/party'
+        promises.push(axios.get(ehrURL, config))
+      });
+
+      axios.all(promises).then(function(results){
+        var index = 0;
+        results.forEach(function(response){
+          var patient = response.data.party;
+          patient['referral_id'] = referralIDArray[index]
+          patient['ehrID'] = ehrIDArray[index]
+          patient['referred_by_id'] = referredByIDArray[index]
+          patients.push(patient)
+          index++
+          console.log("Pushed patient", patient)
+        })
+        that.setState({
+          patients: patients
+        })
+      })
+      /*for (var i = 0; i < ehrDetails.length; i++) {
         var ehrID = ehrDetails[i]['ehrID']
         var referralID = ehrDetails[i]['referral_id']
         var referredByID = ehrDetails[i]['referred_by_id']
@@ -44,14 +72,14 @@ var Scheduler = React.createClass({
           console.log(patient)
           console.log('ehrID')
           console.log(ehrID)
-
+          console.log(patients)
           that.setState({
             patients: patients
           })
         }).catch(function (error) {
           console.log(error)
         })
-      }
+      }*/
     }).catch(function (error) {
       console.log(error)
     })
