@@ -4,7 +4,9 @@ import Link from 'next/link'
 export default ({children, href, active, ...props}) => {
   return (
     <Link href={href} prefetch {...props}>
-      <a className={`${styles.link} ${active && styles.active}`} children={children} />
+      <a
+        className={`${styles.link} ${active && styles.active}`}
+        children={children} />
     </Link>
   )
 }

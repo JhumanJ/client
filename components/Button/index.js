@@ -1,7 +1,10 @@
 import React from 'react'
 import {style, merge} from 'glamor'
 
-export default ({primary, ...props}) => <button className={primary ? styles().primary : styles().normal} {...props} />
+export default ({primary, ...props}) =>
+  <button
+    className={primary ? styles().primary : styles().normal}
+    {...props} />
 
 const styles = () => {
   const normal = style({
