@@ -3,10 +3,13 @@ import Masthead from './components/Masthead'
 import LoginDropdown from './components/LoginDropdown'
 import NavLinks from './components/NavLinks'
 
-export default ({user, setHardcodedUser, activePage, ...props}) => (
+export default ({user, setHardcodedUser, activePage, loading, ...props}) => (
   <div className={styles.container} {...props}>
     <Masthead />
-    <LoginDropdown user={user} setHardcodedUser={setHardcodedUser} />
+    <LoginDropdown
+      loading={user.loading}
+      user={user}
+      setHardcodedUser={setHardcodedUser} />
     <NavLinks activePage={activePage} />
   </div>
 )

@@ -1,6 +1,7 @@
 import {style} from 'glamor'
+import Select from 'react-select'
 
-export default ({user, setHardcodedUser, ...props}) => {
+export default ({user, loading, setHardcodedUser, ...props}) => {
   const users = [
     {
       id: 34,
@@ -15,15 +16,18 @@ export default ({user, setHardcodedUser, ...props}) => {
   ]
 
   const handleChange = (e) => {
-    setHardcodedUser(users.find(item => item.id == e.target.value))
+    setHardcodedUser(users.find(item => item.id == e.value))
   }
 
   return (
     <div className={styles.container} onChange={handleChange}>
-      <select className={styles.name} defaultValue={user.id || -1} selected={user.id}>
-        <option className={styles.visibleOption} value={-1} children='Anonymous' />
-        {users.map(item => <option className={styles.visibleOption} key={item.id} children={item.name} value={item.id} />)}
-      </select>
+      <Select
+        name="user-select"
+        value={user.id || -1}
+        disabled={loading}
+        isLoading={loading}
+        onChange={handleChange}
+        options={[{value: -1, label: 'Anonymous'}, ...users.map(user => ({value: user.id, label: user.name}))]}/>
     </div>
   )
 }

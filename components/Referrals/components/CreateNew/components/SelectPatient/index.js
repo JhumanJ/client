@@ -1,5 +1,4 @@
 import Select from 'react-select'
-import Head from 'next/head'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {selectPatient, getOpenEHRId} from '../../../../../../data/referral/actions'
@@ -36,13 +35,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(({openEHRSessionId, 
 
   return (
     <div {...props}>
-      <Head>
-        <link rel='stylesheet' href='https://unpkg.com/react-select/dist/react-select.css' />
-      </Head>
       <Select.Async
         name='select-patient'
         loadOptions={getPatients}
-        isLoading
         onChange={handleChange}
         autoload={false}
         value={selectedPatient.id} />
