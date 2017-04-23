@@ -123,7 +123,7 @@ var Grid = React.createClass({
 // here
     var specialtyListing = function (specialities, interestedMeeting, meetingTitle, removeFromGrid, addPatient, year2, month2, day2) {
       var list = specialities.map((specialty, i) =>
-        <SpecialtyList patients={specialty['patients']} meeting={interestedMeeting} specialty={specialty['name']} removeFromGrid={removeFromGrid} addPatient={addPatient} year={year2} month={month2} day={day2} />
+        <SpecialtyList patients={specialty['patients']} hasFinishedLoading={that.props.hasFinishedLoading} meeting={interestedMeeting} specialty={specialty['name']} removeFromGrid={removeFromGrid} addPatient={addPatient} year={year2} month={month2} day={day2} />
 			)
       return list
     }

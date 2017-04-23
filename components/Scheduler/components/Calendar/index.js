@@ -111,6 +111,7 @@ var Calendar = React.createClass({
       monthNamesFull: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
       firstOfMonth: null,
       daysInMonth: null,
+      hasFinishedLoading: false,
       events: []
     }
   },
@@ -274,6 +275,9 @@ var Calendar = React.createClass({
   },
 
   getPatients: function (meeting, year, month, day) {
+    this.setState({
+      hasFinishedLoading: false
+    })
     var that = this
     const openEHRSessionId = this.props.openEHRSessionId
     const url = 'http://peachteam35.uksouth.cloudapp.azure.com:8080/api/patient_assignments/meeting_occurence/' + meeting['meeting_occurence_id']
@@ -291,7 +295,72 @@ var Calendar = React.createClass({
     }
     axios.get(url, config).then(function (response) {
       var meetings = response.data
-      for (var i = 0; i < meetings.length; i++) {
+      var ehrIDArray = [];
+      var referralIDArray = [];
+      var patientAssignmentIDArray = [];
+      var specialityIDArray = [];
+      var promises = [];
+      meetings.forEach(function(meeting){
+        ehrIDArray.push(meeting['ehrID']);
+        patientAssignmentIDArray.push(meeting['patient_assigment_id']);
+        referralIDArray.push(meeting['referral_id']);
+        specialityIDArray.push(meeting['speciality_id']);
+        var ehrID = meeting['ehrID']
+        var ehrURL = 'https://ehrscape.code4health.org/rest/v1/demographics/ehr/' + ehrID + '/party'
+        promises.push(axios.get(ehrURL, configEHR))
+      })
+      var events = that.state.events;
+      axios.all(promises).then(function(results){
+        var index = 0;
+        results.forEach(function(response){
+          var patient = response.data.party;
+          patient['patient_assignment_id'] = patientAssignmentIDArray[index]
+          patient['ehrID'] = ehrIDArray[index]
+          patient['referral_id'] = referralIDArray[index]
+          patient['speciality_id'] = specialityIDArray[index]
+          console.log("KNOWN", patient)
+          index++
+          for (var l = 0; l < events.length; l++) {
+            for (var j = 0; j < events[l].meeting.length; j++) {
+              if (_.isEqual(meeting, events[l].meeting[j])) {
+                for (var k = 0; k < events[l].meeting[j]['specialities'].length; k++) {
+                  if (events[l].meeting[j]['specialities'][k]['speciality_id'] == patient['speciality_id']) {
+                    if (events[l].meeting[j].specialities[k].hasOwnProperty('patients')) {
+                          var alreadyExists = false
+                          var similarIndex = null
+                          for (var m = 0; m < events[l].meeting[j]['specialities'][k]['patients'].length; m++) {
+                              if (events[l].meeting[j]['specialities'][k]['patients'][m]['firstNames'] == patient['firstNames'] && events[l].meeting[j]['specialities'][k]['patients'][m]['lastNames'] == patient['lastNames'] && events[l].meeting[j]['specialities'][k]['patients'][m]['gender'] == patient['gender'] && events[l].meeting[j]['specialities'][k]['patients'][m]['dateOfBirth'] == patient['dateOfBirth']) {
+                                similarIndex = m
+                                if (events[l].meeting[j]['specialities'][k]['patients'][m]['patient_assignment_id'] == patient['patient_assignment_id']) {
+                                      alreadyExists = true
+                                }
+                              }
+                            }
+                          if (!alreadyExists && similarIndex != null) {
+                                events[l].meeting[j]['specialities'][k]['patients'].splice(similarIndex, 1)
+                                events[l].meeting[j]['specialities'][k]['patients'].push(patient)
+                              }
+                            else if(!alreadyExists && similarIndex == null){
+                              events[l].meeting[j]['specialities'][k]['patients'].push(patient)
+                            }
+                            
+                        } else {
+                          events[l].meeting[j]['specialities'][k]['patients'] = []
+                          events[l].meeting[j]['specialities'][k]['patients'].push(patient)
+                        }
+                  }
+                }
+              }
+            }
+          }
+        })
+        that.setState({
+          events: events,
+          hasFinishedLoading: true
+        })
+      })
+      /*for (var i = 0; i < meetings.length; i++) {
+
         var ehrID = meetings[i]['ehrID']
         var ehrURL = 'https://ehrscape.code4health.org/rest/v1/demographics/ehr/' + ehrID + '/party'
         var specialityID = meetings[i]['speciality_id']
@@ -316,16 +385,17 @@ var Calendar = React.createClass({
                                 similarIndex = m
                                 if (events[l].meeting[j]['specialities'][k]['patients'][m]['patient_assignment_id'] == patient['patient_assignment_id']) {
                                       alreadyExists = true
-                                    }
+                                }
                               }
                             }
-                          if (!alreadyExists && events[l].meeting[j].specialities[k].patients.length != 0) {
-                              console.log('HERE!')
-                              if (events[l].meeting[j]['specialities'][k]['patients'][similarIndex].hasOwnProperty('patient_assignment_id')) {
+                          if (!alreadyExists && similarIndex != null) {
                                 events[l].meeting[j]['specialities'][k]['patients'].splice(similarIndex, 1)
+                                events[l].meeting[j]['specialities'][k]['patients'].push(patient)
                               }
+                            else if(!alreadyExists && similarIndex == null){
                               events[l].meeting[j]['specialities'][k]['patients'].push(patient)
                             }
+                            
                         } else {
                           events[l].meeting[j]['specialities'][k]['patients'] = []
                           events[l].meeting[j]['specialities'][k]['patients'].push(patient)
@@ -339,7 +409,7 @@ var Calendar = React.createClass({
             events: events
           })
         })
-      }
+      }*/
     })
   },
 
@@ -437,6 +507,7 @@ var Calendar = React.createClass({
                 var patient = events[i].meeting[j]['specialities'][k]['patients'][index]
                 console.log(patient)
                 console.log('PUTURL2', putURL + patient['referral_id'])
+                console.log("Delete", deleteURL + patient['patient_assignment_id'] )
                 axios.delete(deleteURL + patient['patient_assignment_id']).then(function (response) {
                   axios.put(putURL + patient['referral_id'], {
                     "Referral": {
@@ -462,7 +533,7 @@ var Calendar = React.createClass({
         <div className='rinner'>
           <Header monthNames={this.state.monthNamesFull} month={this.state.month} year={this.state.year} onPrev={this.getPrev} onNext={this.getNext} />
           <WeekDays dayNames={this.state.dayNames} startDay={this.state.startDay} weekNumbers={this.state.weekNumbers} />
-          <MonthDates events={this.state.events} getPatients={this.getPatients} removeFromGrid={this.removeFromGrid} addPatients={this.addPatients} addPatient={this.props.addPatient} month={this.state.month} year={this.state.year} daysInMonth={this.state.daysInMonth} firstOfMonth={this.state.firstOfMonth} startDay={this.state.startDay} onSelect={this.selectDate} weekNumbers={this.state.weekNumbers} disablePast={this.state.disablePast} minDate={this.state.minDate} />
+          <MonthDates events={this.state.events} hasFinishedLoading={this.state.hasFinishedLoading} getPatients={this.getPatients} removeFromGrid={this.removeFromGrid} addPatients={this.addPatients} addPatient={this.props.addPatient} month={this.state.month} year={this.state.year} daysInMonth={this.state.daysInMonth} firstOfMonth={this.state.firstOfMonth} startDay={this.state.startDay} onSelect={this.selectDate} weekNumbers={this.state.weekNumbers} disablePast={this.state.disablePast} minDate={this.state.minDate} />
         </div>
       </div>
     )
@@ -580,7 +651,7 @@ var MonthDates = React.createClass({
                   }
 
                   return (
-                    <div className={className} role='button' tabIndex='0' onClick={that.props.onSelect.bind(null, that, that.props.year, that.props.month, d)}><Grid dayEvent={dayEvent} getPatients={that.props.getPatients} removeFromGrid={that.props.removeFromGrid} addPatients={that.props.addPatients} year={that.props.year} month={that.props.month} day={d} addPatient={that.props.addPatient}>{d}</Grid></div>
+                    <div className={className} role='button' tabIndex='0' onClick={that.props.onSelect.bind(null, that, that.props.year, that.props.month, d)}><Grid hasFinishedLoading={that.props.hasFinishedLoading} dayEvent={dayEvent} getPatients={that.props.getPatients} removeFromGrid={that.props.removeFromGrid} addPatients={that.props.addPatients} year={that.props.year} month={that.props.month} day={d} addPatient={that.props.addPatient}>{d}</Grid></div>
 
                   )
                 }
