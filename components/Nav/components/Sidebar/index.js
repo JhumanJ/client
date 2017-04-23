@@ -7,7 +7,6 @@ export default ({user, setHardcodedUser, activePage, ...props}) => (
   <div className={styles.container} {...props}>
     <Masthead />
     <LoginDropdown user={user} setHardcodedUser={setHardcodedUser} />
-    <div className={styles.divider} />
     <NavLinks activePage={activePage} />
   </div>
 )
@@ -23,12 +22,5 @@ const styles = {
     height: '100vh',
     overflowY: 'auto',
     fontFamily: 'Lato, sans-serif'
-  }),
-  divider: style({
-    height: '1px',
-    width: '60%',
-    marginLeft: '25px',
-    marginTop: '15px',
-    background: 'white'
   })
 }

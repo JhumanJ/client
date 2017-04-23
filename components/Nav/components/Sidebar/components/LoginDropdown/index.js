@@ -30,7 +30,8 @@ export default ({user, setHardcodedUser, ...props}) => {
 
 const styles = {
   container: style({
-    padding: '15px 25px'
+    padding: '15px 25px',
+    background: 'rgba(255, 255, 255, .16)',
   }),
   visibleOption: style({
     color: 'black'

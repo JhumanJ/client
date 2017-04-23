@@ -3,19 +3,28 @@ import moment from 'moment'
 
 export default ({title, comment, dueDate, onDelete, loading, ...props}) => (
   <div className={`${styles.container} ${loading && styles.loading}`}>
-    <h4 className={styles.title}>{title}</h4>
-    <p className={styles.dueDate}><strong>{moment(dueDate).format('ddd DD MMM')}</strong> (due {moment(dueDate).fromNow()})</p>
-    <p className={styles.comment}>{comment}</p>
-    <button
-      className={styles.button}
-      onClick={onDelete}
-      children='Delete' />
+    <div className={styles.left}>
+      <h4 className={styles.title}>{title}</h4>
+      <p className={styles.dueDate}>
+        <span className={styles.dueDate_date}>due on {moment(dueDate).format('ddd DD MMM')}</span>
+        <span className={styles.dueIn}>({moment(dueDate).fromNow()})</span>
+      </p>
+      <p className={styles.comment}>{comment}</p>
+    </div>
+    <div className={styles.right}>
+      <button
+        className={styles.button}
+        onClick={onDelete}
+        children='Delete' />
+    </div>
   </div>
 )
 
 const styles = {
   container: style({
-    padding: '10px',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'stretch',
     background: 'white',
     border: '1px solid #ddd',
     transition: '150ms',
@@ -27,6 +36,17 @@ const styles = {
       background: 'dodgerblue',
       color: 'white'
     }
+  }),
+
+  left: style({
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '10px',
+  }),
+
+  right: style({
+    display: 'flex',
+    flexDirection: 'column',
   }),
 
   loading: style({
@@ -44,17 +64,28 @@ const styles = {
 
   dueDate: style({
     fontSize: '11px',
-    opacity: 0.6,
+    opacity: 0.8,
     margin: '0 0 10px'
   }),
 
+  dueDate_date: style({
+    fontWeight: 'bold',
+  }),
+
+  dueIn: style({
+    marginLeft: '5px',
+    opacity: .8,
+  }),
+
   button: style({
-    background: 'red',
+    background: '#e74c3c',
     color: 'white',
     border: 0,
+    transition: '220ms',
+    flex: 1,
 
     ':hover': {
-      background: 'darkred'
+      background: '#c0392b'
     }
   })
 }
