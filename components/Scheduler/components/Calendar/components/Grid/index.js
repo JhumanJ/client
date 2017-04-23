@@ -11,7 +11,6 @@ var gridTarget = {
   drop: function (props, monitor, component) {
     var item = monitor.getItem()
 	  // item = Patient
-	  	console.log('AFter drag')
 	  	console.log(item)
     var index = item.id
     if (component.props.dayEvent.meeting.length !== 0) {

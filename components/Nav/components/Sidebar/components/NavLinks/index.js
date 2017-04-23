@@ -2,7 +2,6 @@ import {style} from 'glamor'
 import NavLink from './components/NavLink'
 
 export default ({activePage, ...props}) => {
-  console.log('AP:', activePage)
   return (
     <div className={styles.container}>
       <NavLink active={activePage === '/'} href='/'>Home</NavLink>

@@ -20,9 +20,6 @@ const storeReferralFailure = (error) => ({type: STORE_REFERRAL_FAILURE, error})
 // actions api
 export const selectPatient = (patient) => ({type: SELECT_PATIENT, patient})
 export const getOpenEHRId = (patientId, openEHRSessionId) => (dispatch) => {
-  console.log('openEHRSessionId', openEHRSessionId)
-  console.log('pID', patientId)
-
   dispatch(getOpenEHRIdRequest())
   axios.get(`https://ehrscape.code4health.org/rest/v1/ehr/?subjectId=${patientId}&subjectNamespace=uk.nhs.nhs_number`, {
     headers: {
