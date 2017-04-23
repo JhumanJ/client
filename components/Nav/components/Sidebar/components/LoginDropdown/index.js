@@ -6,28 +6,28 @@ export default ({user, loading, setHardcodedUser, ...props}) => {
     {
       id: 34,
       name: 'Normal User',
-      role: 'normal'
+      role: 'normal',
     },
     {
       id: 50,
       name: 'Admin User',
-      role: 'admin'
-    }
+      role: 'admin',
+    },
   ]
 
-  const handleChange = (e) => {
-    setHardcodedUser(users.find(item => item.id == e.value))
-  }
+  const handleChange = e => setHardcodedUser(users.find(item => item.id == e.value))
 
   return (
-    <div className={styles.container} onChange={handleChange}>
+    <div className={styles.container}>
       <Select
-        name="user-select"
+        name="user-login"
+        searchable={false}
         value={user.id || -1}
+        resetValue={-1}
         disabled={loading}
         isLoading={loading}
         onChange={handleChange}
-        options={[{value: -1, label: 'Anonymous'}, ...users.map(user => ({value: user.id, label: user.name}))]}/>
+        options={[{value: -1, label: 'Anonymous'}, ...users.map(item => ({value: item.id, label: item.name}))]}/>
     </div>
   )
 }

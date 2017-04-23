@@ -20,8 +20,14 @@ const getOpenEhrSessionIdSuccess = (response) => ({type: GET_OPEN_EHR_SESSION_ID
 const getOpenEhrSessionIdFailure = (error) => ({type: GET_OPEN_EHR_SESSION_ID_FAILURE, error})
 
 // Action Api
-export const setHardcodedUser = user => dispatch => {
-  dispatch(getOpenEhrSessionId())
+export const setHardcodedUser = _user => dispatch => {
+  const user = _user || {
+    id: -1,
+    role: null,
+    name: '',
+  }
+  // get openEHRSessionId if the user is not logged out.
+  user.id !== -1 && dispatch(getOpenEhrSessionId())
   dispatch({type: SET_HARDCODED_USER, user})
 }
 export const getUser = (authToken) => {

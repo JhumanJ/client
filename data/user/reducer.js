@@ -1,9 +1,9 @@
 import * as a from './actions'
 
 const init = {
-  id: null,
-  name: 'Some Name',
+  id: -1,
   role: null,
+  name: '',
   openEHRSessionId: '',
   loading: false,
   error: false
