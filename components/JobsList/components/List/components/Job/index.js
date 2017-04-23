@@ -4,7 +4,7 @@ import moment from 'moment'
 export default ({title, comment, dueDate, onDelete, loading, ...props}) => (
   <div className={`${styles.container} ${loading && styles.loading}`}>
     <div className={styles.left}>
-      <h4 className={styles.title}>{title}</h4>
+      <h3 className={styles.title}>{title}</h3>
       <p className={styles.dueDate}>
         <span className={styles.dueDate_date}>due on {moment(dueDate).format('ddd DD MMM')}</span>
         <span className={styles.dueIn}>({moment(dueDate).fromNow()})</span>

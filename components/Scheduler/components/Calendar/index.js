@@ -2,13 +2,12 @@ import React from 'react'
 import Grid from './components/Grid'
 import axios from 'axios'
 import isEqual from 'lodash.isequal'
-var _ = require('underscore')
-
+const _ = require('underscore')
 import {css} from 'glamor'
 
 const base_url = 'http://peachteam35.uksouth.cloudapp.azure.com:8080/api/scheduler/'
 
-var Calendar = React.createClass({
+let Calendar = React.createClass({
   calc: function (year, month) {
     if (this.state.selectedElement) {
       if (this.state.selectedMonth != month || this.state.selectedYear != year) {
@@ -24,23 +23,23 @@ var Calendar = React.createClass({
   },
   componentWillMount: function () {
     this.setState(this.calc.call(null, this.state.year, this.state.month))
-    var events = this.state.events
-    var meetings
-    var month2 = this.state.month === 12 ? 1 : this.state.month + 1
-    var urlmonth = month2 > 9 ? month2 : '0' + month2
-    var urlyear = this.state.year
-    var url = base_url + urlmonth + '/' + urlyear
-    var compareMeetings = function (meeting1, meeting2) {
+    let events = this.state.events
+    let meetings
+    let month2 = this.state.month === 12 ? 1 : this.state.month + 1
+    let urlmonth = month2 > 9 ? month2 : '0' + month2
+    let urlyear = this.state.year
+    let url = base_url + urlmonth + '/' + urlyear
+    let compareMeetings = function (meeting1, meeting2) {
       return (meeting1['meeting_occurence_id'] === meeting2['meeting_occurence_id'] && meeting1['meeting_id'] === meeting2['meeting_id'] && meeting1['occurence_date'] === meeting2['occurence_date'] && meeting1['title'] === meeting2['title'] && meeting1['starting_time'] === meeting2['starting_time'] && meeting1['ending_time'] === meeting2['ending_time'] && meeting1['created_at'] === meeting2['created_at'])
     }
-    var that = this
+    let that = this
     axios.get(url).then(function (response) {
       meetings = response.data
-      for (var i = 0; i < meetings.length; i++) {
-        var found = 0
-        var d = new Date(meetings[i]['occurence_date'])
+      for (let i = 0; i < meetings.length; i++) {
+        let found = 0
+        let d = new Date(meetings[i]['occurence_date'])
         if (events.length === 0) {
-          var newEventTest = {
+          let newEventTest = {
             date: d,
             year: d.getFullYear(),
             month: d.getMonth(),
@@ -50,11 +49,11 @@ var Calendar = React.createClass({
           newEventTest.meeting.push(meetings[i])
           events.push(newEventTest)
         } else {
-          for (var j = 0; j < events.length; j++) {
+          for (let j = 0; j < events.length; j++) {
             if (d.getFullYear() === events[j].year && d.getMonth() === events[j].month && d.getDate() === events[j].day) {
               found = 1
-              var alreadyExists = false
-              for (var k = 0; k < events[j].meeting.length; k++) {
+              let alreadyExists = false
+              for (let k = 0; k < events[j].meeting.length; k++) {
                 if (compareMeetings(meetings[i], events[j].meeting[k])) {
                   alreadyExists = true
                 }
@@ -65,7 +64,7 @@ var Calendar = React.createClass({
             }
           }
           if (found === 0) {
-            var newEventTest = {
+            let newEventTest = {
               date: d,
               year: d.getFullYear(),
               month: d.getMonth(),
@@ -94,7 +93,7 @@ var Calendar = React.createClass({
     }
   },
   getInitialState: function () {
-    var date = new Date()
+    let date = new Date()
     return {
       year: date.getFullYear(),
       month: date.getMonth(),
@@ -116,7 +115,7 @@ var Calendar = React.createClass({
     }
   },
   getPrev: function () {
-    var state = {}
+    let state = {}
     if (this.state.month > 0) {
       state.month = this.state.month - 1
       state.year = this.state.year
@@ -124,23 +123,23 @@ var Calendar = React.createClass({
       state.month = 11
       state.year = this.state.year - 1
     }
-    var meetings
-    var month2 = state.month === 12 ? 1 : state.month + 1
-    var urlmonth = month2 > 9 ? month2 : '0' + month2
-    var urlyear = state.year
-    var url = base_url + urlmonth + '/' + urlyear
-    var that = this
-    var events = this.state.events
-    var compareMeetings = function (meeting1, meeting2) {
+    let meetings
+    let month2 = state.month === 12 ? 1 : state.month + 1
+    let urlmonth = month2 > 9 ? month2 : '0' + month2
+    let urlyear = state.year
+    let url = base_url + urlmonth + '/' + urlyear
+    let that = this
+    let events = this.state.events
+    let compareMeetings = function (meeting1, meeting2) {
       return (meeting1['meeting_occurence_id'] === meeting2['meeting_occurence_id'] && meeting1['meeting_id'] === meeting2['meeting_id'] && meeting1['occurence_date'] === meeting2['occurence_date'] && meeting1['title'] === meeting2['title'] && meeting1['starting_time'] === meeting2['starting_time'] && meeting1['ending_time'] === meeting2['ending_time'] && meeting1['created_at'] === meeting2['created_at'])
     }
     axios.get(url).then(function (response) {
       meetings = response.data
-      for (var i = 0; i < meetings.length; i++) {
-        var found = 0
-        var d = new Date(meetings[i]['occurence_date'])
+      for (let i = 0; i < meetings.length; i++) {
+        let found = 0
+        let d = new Date(meetings[i]['occurence_date'])
         if (events.length === 0) {
-          var newEventTest = {
+          let newEventTest = {
             date: d,
             year: d.getFullYear(),
             month: d.getMonth(),
@@ -150,11 +149,11 @@ var Calendar = React.createClass({
           newEventTest.meeting.push(meetings[i])
           events.push(newEventTest)
         } else {
-          for (var j = 0; j < events.length; j++) {
+          for (let j = 0; j < events.length; j++) {
             if (d.getFullYear() === events[j].year && d.getMonth() === events[j].month && d.getDate() === events[j].day) {
               found = 1
-              var alreadyExists = false
-              for (var k = 0; k < events[j].meeting.length; k++) {
+              let alreadyExists = false
+              for (let k = 0; k < events[j].meeting.length; k++) {
                 if (compareMeetings(meetings[i], events[j].meeting[k])) {
                   alreadyExists = true
                 }
@@ -165,7 +164,7 @@ var Calendar = React.createClass({
             }
           }
           if (found === 0) {
-            var newEventTest = {
+            let newEventTest = {
               date: d,
               year: d.getFullYear(),
               month: d.getMonth(),
@@ -188,7 +187,7 @@ var Calendar = React.createClass({
     this.setState(state)
   },
   getNext: function () {
-    var state = {}
+    let state = {}
     if (this.state.month < 11) {
       state.month = this.state.month + 1
       state.year = this.state.year
@@ -196,23 +195,23 @@ var Calendar = React.createClass({
       state.month = 0
       state.year = this.state.year + 1
     }
-    var meetings
-    var month2 = state.month === 12 ? 1 : state.month + 1
-    var urlmonth = month2 > 9 ? month2 : '0' + month2
-    var urlyear = state.year
-    var url = base_url + urlmonth + '/' + urlyear
-    var that = this
-    var events = this.state.events
-    var compareMeetings = function (meeting1, meeting2) {
+    let meetings
+    let month2 = state.month === 12 ? 1 : state.month + 1
+    let urlmonth = month2 > 9 ? month2 : '0' + month2
+    let urlyear = state.year
+    let url = base_url + urlmonth + '/' + urlyear
+    let that = this
+    let events = this.state.events
+    let compareMeetings = function (meeting1, meeting2) {
       return (meeting1['meeting_occurence_id'] === meeting2['meeting_occurence_id'] && meeting1['meeting_id'] === meeting2['meeting_id'] && meeting1['occurence_date'] === meeting2['occurence_date'] && meeting1['title'] === meeting2['title'] && meeting1['starting_time'] === meeting2['starting_time'] && meeting1['ending_time'] === meeting2['ending_time'] && meeting1['created_at'] === meeting2['created_at'])
     }
     axios.get(url).then(function (response) {
       meetings = response.data
-      for (var i = 0; i < meetings.length; i++) {
-        var found = 0
-        var d = new Date(meetings[i]['occurence_date'])
+      for (let i = 0; i < meetings.length; i++) {
+        let found = 0
+        let d = new Date(meetings[i]['occurence_date'])
         if (events.length === 0) {
-          var newEventTest = {
+          let newEventTest = {
             date: d,
             year: d.getFullYear(),
             month: d.getMonth(),
@@ -222,11 +221,11 @@ var Calendar = React.createClass({
           newEventTest.meeting.push(meetings[i])
           events.push(newEventTest)
         } else {
-          for (var j = 0; j < events.length; j++) {
+          for (let j = 0; j < events.length; j++) {
             if (d.getFullYear() === events[j].year && d.getMonth() === events[j].month && d.getDate() === events[j].day) {
               found = 1
-              var alreadyExists = false
-              for (var k = 0; k < events[j].meeting.length; k++) {
+              let alreadyExists = false
+              for (let k = 0; k < events[j].meeting.length; k++) {
                 if (compareMeetings(meetings[i], events[j].meeting[k])) {
                   alreadyExists = true
                 }
@@ -237,7 +236,7 @@ var Calendar = React.createClass({
             }
           }
           if (found === 0) {
-            var newEventTest = {
+            let newEventTest = {
               date: d,
               year: d.getFullYear(),
               month: d.getMonth(),
@@ -278,7 +277,7 @@ var Calendar = React.createClass({
     this.setState({
       hasFinishedLoading: false
     })
-    var that = this
+    let that = this
     const openEHRSessionId = this.props.openEHRSessionId
     const url = 'http://peachteam35.uksouth.cloudapp.azure.com:8080/api/patient_assignments/meeting_occurence/' + meeting['meeting_occurence_id']
     const config = {
@@ -294,41 +293,41 @@ var Calendar = React.createClass({
       }
     }
     axios.get(url, config).then(function (response) {
-      var meetings = response.data
-      var ehrIDArray = [];
-      var referralIDArray = [];
-      var patientAssignmentIDArray = [];
-      var specialityIDArray = [];
-      var promises = [];
+      let meetings = response.data
+      let ehrIDArray = [];
+      let referralIDArray = [];
+      let patientAssignmentIDArray = [];
+      let specialityIDArray = [];
+      let promises = [];
       meetings.forEach(function(meeting){
         ehrIDArray.push(meeting['ehrID']);
         patientAssignmentIDArray.push(meeting['patient_assigment_id']);
         referralIDArray.push(meeting['referral_id']);
         specialityIDArray.push(meeting['speciality_id']);
-        var ehrID = meeting['ehrID']
-        var ehrURL = 'https://ehrscape.code4health.org/rest/v1/demographics/ehr/' + ehrID + '/party'
+        let ehrID = meeting['ehrID']
+        let ehrURL = 'https://ehrscape.code4health.org/rest/v1/demographics/ehr/' + ehrID + '/party'
         promises.push(axios.get(ehrURL, configEHR))
       })
-      var events = that.state.events;
+      let events = that.state.events;
       axios.all(promises).then(function(results){
-        var index = 0;
+        let index = 0;
         results.forEach(function(response){
-          var patient = response.data.party;
+          let patient = response.data.party;
           patient['patient_assignment_id'] = patientAssignmentIDArray[index]
           patient['ehrID'] = ehrIDArray[index]
           patient['referral_id'] = referralIDArray[index]
           patient['speciality_id'] = specialityIDArray[index]
           console.log("KNOWN", patient)
           index++
-          for (var l = 0; l < events.length; l++) {
-            for (var j = 0; j < events[l].meeting.length; j++) {
+          for (let l = 0; l < events.length; l++) {
+            for (let j = 0; j < events[l].meeting.length; j++) {
               if (_.isEqual(meeting, events[l].meeting[j])) {
-                for (var k = 0; k < events[l].meeting[j]['specialities'].length; k++) {
+                for (let k = 0; k < events[l].meeting[j]['specialities'].length; k++) {
                   if (events[l].meeting[j]['specialities'][k]['speciality_id'] == patient['speciality_id']) {
                     if (events[l].meeting[j].specialities[k].hasOwnProperty('patients')) {
-                          var alreadyExists = false
-                          var similarIndex = null
-                          for (var m = 0; m < events[l].meeting[j]['specialities'][k]['patients'].length; m++) {
+                          let alreadyExists = false
+                          let similarIndex = null
+                          for (let m = 0; m < events[l].meeting[j]['specialities'][k]['patients'].length; m++) {
                               if (events[l].meeting[j]['specialities'][k]['patients'][m]['firstNames'] == patient['firstNames'] && events[l].meeting[j]['specialities'][k]['patients'][m]['lastNames'] == patient['lastNames'] && events[l].meeting[j]['specialities'][k]['patients'][m]['gender'] == patient['gender'] && events[l].meeting[j]['specialities'][k]['patients'][m]['dateOfBirth'] == patient['dateOfBirth']) {
                                 similarIndex = m
                                 if (events[l].meeting[j]['specialities'][k]['patients'][m]['patient_assignment_id'] == patient['patient_assignment_id']) {
@@ -343,7 +342,7 @@ var Calendar = React.createClass({
                             else if(!alreadyExists && similarIndex == null){
                               events[l].meeting[j]['specialities'][k]['patients'].push(patient)
                             }
-                            
+
                         } else {
                           events[l].meeting[j]['specialities'][k]['patients'] = []
                           events[l].meeting[j]['specialities'][k]['patients'].push(patient)
@@ -359,28 +358,28 @@ var Calendar = React.createClass({
           hasFinishedLoading: true
         })
       })
-      /*for (var i = 0; i < meetings.length; i++) {
+      /*for (let i = 0; i < meetings.length; i++) {
 
-        var ehrID = meetings[i]['ehrID']
-        var ehrURL = 'https://ehrscape.code4health.org/rest/v1/demographics/ehr/' + ehrID + '/party'
-        var specialityID = meetings[i]['speciality_id']
-        var patient_assignment_id = meetings[i]['patient_assigment_id']
-        var referral_id = meetings[i]['referral_id']
+        let ehrID = meetings[i]['ehrID']
+        let ehrURL = 'https://ehrscape.code4health.org/rest/v1/demographics/ehr/' + ehrID + '/party'
+        let specialityID = meetings[i]['speciality_id']
+        let patient_assignment_id = meetings[i]['patient_assigment_id']
+        let referral_id = meetings[i]['referral_id']
         axios.get(ehrURL, configEHR).then(function (res) {
-          var events = that.state.events
-          var patient = res.data.party
+          let events = that.state.events
+          let patient = res.data.party
           patient['patient_assignment_id'] = patient_assignment_id
           patient['ehrID'] = ehrID
           patient['referral_id'] = referral_id
-          for (var l = 0; l < events.length; l++) {
-            for (var j = 0; j < events[l].meeting.length; j++) {
+          for (let l = 0; l < events.length; l++) {
+            for (let j = 0; j < events[l].meeting.length; j++) {
               if (_.isEqual(meeting, events[l].meeting[j])) {
-                for (var k = 0; k < events[l].meeting[j]['specialities'].length; k++) {
+                for (let k = 0; k < events[l].meeting[j]['specialities'].length; k++) {
                   if (events[l].meeting[j]['specialities'][k]['speciality_id'] == specialityID) {
                     if (events[l].meeting[j].specialities[k].hasOwnProperty('patients')) {
-                          var alreadyExists = false
-                          var similarIndex = null
-                          for (var m = 0; m < events[l].meeting[j]['specialities'][k]['patients'].length; m++) {
+                          let alreadyExists = false
+                          let similarIndex = null
+                          for (let m = 0; m < events[l].meeting[j]['specialities'][k]['patients'].length; m++) {
                               if (events[l].meeting[j]['specialities'][k]['patients'][m]['firstNames'] == patient['firstNames'] && events[l].meeting[j]['specialities'][k]['patients'][m]['lastNames'] == patient['lastNames'] && events[l].meeting[j]['specialities'][k]['patients'][m]['gender'] == patient['gender'] && events[l].meeting[j]['specialities'][k]['patients'][m]['dateOfBirth'] == patient['dateOfBirth']) {
                                 similarIndex = m
                                 if (events[l].meeting[j]['specialities'][k]['patients'][m]['patient_assignment_id'] == patient['patient_assignment_id']) {
@@ -395,7 +394,7 @@ var Calendar = React.createClass({
                             else if(!alreadyExists && similarIndex == null){
                               events[l].meeting[j]['specialities'][k]['patients'].push(patient)
                             }
-                            
+
                         } else {
                           events[l].meeting[j]['specialities'][k]['patients'] = []
                           events[l].meeting[j]['specialities'][k]['patients'].push(patient)
@@ -414,8 +413,8 @@ var Calendar = React.createClass({
   },
 
   addPatients: function (patient, meeting2, specialty2, year, month, day) {
-    var events = this.state.events
-    var that = this
+    let events = this.state.events
+    let that = this
     const openEHRSessionId = this.props.openEHRSessionId
     const baseurl = 'http://peachteam35.uksouth.cloudapp.azure.com:8080/api/patient_assignments/'
     const config = {
@@ -427,11 +426,11 @@ var Calendar = React.createClass({
     const putURL = 'http://peachteam35.uksouth.cloudapp.azure.com:8080/api/referrals/'
                         // map through meeting
                     // map through specialty
-    for (var i = 0; i < events.length; i++) {
+    for (let i = 0; i < events.length; i++) {
       if (events[i].year === year && events[i].month === month && events[i].day === day) {
-        for (var j = 0; j < events[i].meeting.length; j++) {
+        for (let j = 0; j < events[i].meeting.length; j++) {
           if (_.isEqual(meeting2, events[i].meeting[j])) {
-            for (var k = 0; k < events[i].meeting[j]['specialities'].length; k++) {
+            for (let k = 0; k < events[i].meeting[j]['specialities'].length; k++) {
               if (events[i].meeting[j]['specialities'][k]['name'] === specialty2) {
                 if (events[i].meeting[j]['specialities'][k].hasOwnProperty('patients')) {
                   events[i].meeting[j]['specialities'][k]['patients'].push(patient)
@@ -486,8 +485,8 @@ var Calendar = React.createClass({
   },
 
   removeFromGrid: function (index, meeting2, specialty2, year, month, day) {
-    var events = this.state.events
-    var deleteURL = 'http://peachteam35.uksouth.cloudapp.azure.com:8080/api/patient_assignments/'
+    let events = this.state.events
+    let deleteURL = 'http://peachteam35.uksouth.cloudapp.azure.com:8080/api/patient_assignments/'
     const config = {
       headers: {
         'Content-Type': 'application/json'
@@ -498,13 +497,13 @@ var Calendar = React.createClass({
         // map through events
             // map through meetings
                 // map through specialty
-    for (var i = 0; i < events.length; i++) {
+    for (let i = 0; i < events.length; i++) {
       if (events[i].year === year && events[i].month === month && events[i].day === day) {
-        for (var j = 0; j < events[i].meeting.length; j++) {
+        for (let j = 0; j < events[i].meeting.length; j++) {
           if (_.isEqual(meeting2, events[i].meeting[j])) {
-            for (var k = 0; k < events[i].meeting[j]['specialities'].length; k++) {
+            for (let k = 0; k < events[i].meeting[j]['specialities'].length; k++) {
               if (events[i].meeting[j]['specialities'][k]['name'] === specialty2) {
-                var patient = events[i].meeting[j]['specialities'][k]['patients'][index]
+                let patient = events[i].meeting[j]['specialities'][k]['patients'][index]
                 console.log(patient)
                 console.log('PUTURL2', putURL + patient['referral_id'])
                 console.log("Delete", deleteURL + patient['patient_assignment_id'] )
@@ -540,7 +539,7 @@ var Calendar = React.createClass({
   }
 })
 
-var Header = React.createClass({
+let Header = React.createClass({
   render: function () {
     return (
       <div className='rrow rhead'>
@@ -552,9 +551,9 @@ var Header = React.createClass({
   }
 })
 
-var WeekDays = React.createClass({
+let WeekDays = React.createClass({
   render: function () {
-    var that = this,
+    let that = this,
       haystack = Array.apply(null, {length: 7}).map(Number.call, Number)
     return (
       <div className={'rrow rweekdays'}>
@@ -575,7 +574,7 @@ var WeekDays = React.createClass({
   }
 })
 
-var MonthDates = React.createClass({
+let MonthDates = React.createClass({
   statics: {
     year: new Date().getFullYear(),
     month: new Date().getMonth(),
@@ -584,7 +583,7 @@ var MonthDates = React.createClass({
   },
 
   render: function () {
-    var haystack, day, d, current, onClick,
+    let haystack, day, d, current, onClick,
       isDate, className,
       weekStack = Array.apply(null, {length: 7}).map(Number.call, Number),
       that = this,
@@ -612,7 +611,7 @@ var MonthDates = React.createClass({
             <div className='rrow'>
               {(() => {
                 if (that.props.weekNumbers) {
-                  var wn = Math.ceil((((new Date(that.props.year, that.props.month, d) - janOne) / 86400000) + janOne.getDay() + 1) / 7)
+                  let wn = Math.ceil((((new Date(that.props.year, that.props.month, d) - janOne) / 86400000) + janOne.getDay() + 1) / 7)
                   return (
                     <div className='rcell rweeknum'>{wn}</div>
                   )
@@ -631,14 +630,14 @@ var MonthDates = React.createClass({
                         className += ' rpast'
                       }
                             // change meetingA/B/C to meetings array
-                  var dayEvent = {
+                  let dayEvent = {
                     year: 0,
                     month: 0,
                     day: 0,
                     meeting: []
                   }
-                  var events = that.props.events
-                  for (var i = 0; i < events.length; i++) {
+                  let events = that.props.events
+                  for (let i = 0; i < events.length; i++) {
                     if (events[i].year === that.props.year && events[i].month === that.props.month && events[i].day === d) {
                           dayEvent = events[i]
                         }
