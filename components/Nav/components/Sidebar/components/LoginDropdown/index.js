@@ -38,15 +38,4 @@ const styles = {
     padding: '15px 25px',
     background: 'rgba(255, 255, 255, .16)',
   }),
-  visibleOption: style({
-    color: 'black'
-  }),
-  name: style({
-    fontFamily: 'Lato, sans-serif',
-    fontSize: '13px',
-    color: 'white',
-    background: 'none',
-    border: 0,
-    padding: 0
-  })
 }
