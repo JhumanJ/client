@@ -22,6 +22,7 @@ export default ({user, loading, setHardcodedUser, ...props}) => {
       <Select
         name="user-login"
         searchable={false}
+        clearable={user.id !== -1}
         value={user.id || -1}
         resetValue={-1}
         disabled={loading}
