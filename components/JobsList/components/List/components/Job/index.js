@@ -1,9 +1,10 @@
 import {style} from 'glamor'
+import moment from 'moment'
 
 export default ({title, comment, dueDate, onDelete, loading, ...props}) => (
   <div className={`${styles.container} ${loading && styles.loading}`}>
     <h4 className={styles.title}>{title}</h4>
-    <p className={styles.dueDate}>{dueDate}</p>
+    <p className={styles.dueDate}><strong>{moment(dueDate).format('ddd DD MMM')}</strong> (due {moment(dueDate).fromNow()})</p>
     <p className={styles.comment}>{comment}</p>
     <button
       className={styles.button}
